@@ -1,0 +1,24 @@
+.jumbotron {
+	padding-top: 10px;
+	/*padding-bottom: 0px;*/
+	margin-bottom: 0px;
+	background-color: aquamarine;
+}
+
+img {
+	display: inline-block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+h1 {
+	text-align: center;
+	font-size: 40px;
+	margin-top: 0px;
+}
+
+#filters {
+	background-color: gray;
+	color: white;
+	font-size: 20px;
+}
