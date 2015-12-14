@@ -44,7 +44,7 @@ $(document).ready(function() {
     console.log('id', id);
   });
 
-  $('#saveNewCar').on('click', handleNewSongSubmit);
+  $('#saveNewCar').on('click', handleNewCarSubmit);
 
 });
 
