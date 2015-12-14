@@ -26,7 +26,7 @@ $(document).ready(function() {
   $('#newCarModal').modal();
   });
 
-  $('#prospects').on('click', '.delete-car', function(e) {
+  $('#prospects').on('click', '.delete-prospect', function(e) {
     var id = $(this).parents('.prospect').data('prospect-id');
     console.log('deleted id', id);
     $.ajax({
@@ -39,7 +39,57 @@ $(document).ready(function() {
     });
   });
 
+  $('#prospects').on('click', '.edit-prospect', function(e) {
+    var id = $(this).parents('.prospect').data('prospect-id');
+    console.log('id', id);
+  });
+
+  $('#saveNewCar').on('click', handleNewSongSubmit);
+
 });
+
+// handles the modal fields and POSTing the form to the server
+function handleNewCarSubmit(e) {
+  var prospectId = $('#newCarModal').data('prospect-id');
+  var carMake = $('#carMake').val();
+  var carModel = $('#carModel').val();
+  var carYear = $('#carYear').val();
+  var carColor = $('#carColor').val();
+  var carStyle = $('#carStyle').val();
+
+  var formData = {
+    make: carMake,
+    model: carModel,
+    year: carYear,
+    color: carColor,
+    style: carStyle
+  };
+
+  var postUrl = '/api/prospects/' + prospectId + '/wishlists';
+  console.log('posting to ', postUrl, ' with data ', formData);
+
+  $.post(postUrl, formData)
+    .success(function(wishlist) {
+      console.log('wishlist', wishlist);
+
+      // re-get full album and render on page
+      $.get('/api/prospects/' + prospectId).success(function(prospect) {
+        //remove old entry
+        $('[data-prospect-id='+ prospectId + ']').remove();
+        // render a replacement
+        renderProspect(prospect);
+      });
+
+      //clear form
+      $('#carMake').val('');
+      $('#carModel').val('');     
+      $('#carYear').val('');
+      $('#carColor').val('');
+      $('#carStyle').val('');
+      $('#newCarModal').modal('hide');
+
+    });
+}
 
 function buildWishlistHtml(wishlists) {
   var wishlistText = "&ndash;";
@@ -97,8 +147,8 @@ function renderProspect(prospect) {
 
   "              <div class='panel-footer'>" +
   "                <button class='btn btn-primary add-car'>Add Car</button>" +
-  "                <button class='btn btn-warning edit-car'>Edit Car</button>" + 
-  "                <button class='btn btn-danger delete-car'>Delete Car</button>" + 
+  "                <button class='btn btn-warning edit-prospect'>Edit Prospect</button>" + 
+  "                <button class='btn btn-danger delete-prospect'>Delete Prospect</button>" + 
   "              </div>" +
 
   "              <div class='panel-footer'>" +
