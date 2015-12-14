@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
  * DATABASE *
 ************/
 
-var db = require('./models');
+var db = require("./models");
 
 /**********
  * ROUTES *
@@ -26,7 +26,7 @@ var db = require('./models');
  */
 
  app.get('/', function homepage (req, res) {
- 	res.sendFile(__dirname + 'views/index.html');
+ 	res.sendFile(__dirname + '/views/prospects.html');
  });
 
 
@@ -34,11 +34,11 @@ var db = require('./models');
  * JSON API Endpoints
  */
 
-app.get(('/api/prospects', function prospectIndex (req, res) {
+app.get('/api/prospects', function prospectsIndex (req, res) {
 	db.Prospect.find({}, function(err, prospects) {
 		res.json(prospects);
 	});
-}));
+});
 
 
 app.post('/api/prospects', function prospectCreate (req, res) {

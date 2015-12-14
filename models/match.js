@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
-var MatchSchema = new Schema ( {
+var MatchSchema = new Schema({
 	make: String,
 	model: String,
 	year: Number,

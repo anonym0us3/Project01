@@ -7,7 +7,7 @@ var Wishlist = require('./wishlist');
 var Match = require('./match');
 
 
-var ProspectSchema = new Schema ( {
+var ProspectSchema = new Schema({
 	name: String,
 	phone: Number,
 	email: String,

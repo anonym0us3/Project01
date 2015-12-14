@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
-var WishlistSchema = new Schema ( {
+var WishlistSchema = new Schema({
 	make: String,
 	model: String,
 	year: Number,

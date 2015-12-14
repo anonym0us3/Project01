@@ -2,12 +2,37 @@
 
 $(document).ready(function() {
 	console.log("Braaaaaiiiiiiins");
-	$.get('/api/prospects').successf(function (prospects) {
+	$.get('/api/prospects').success(function (prospects) {
 		prospects.forEach(function(prospect) {
 			renderProspect(prospect);
 		});
 	});
+
+  $('#prospect-form form').on('submit', function(e) {
+  e.preventDefault();
+  var formData = $(this).serialize();
+  console.log('formData', formData);
+  $.post('/api/prospects', formData, function(prospect) {
+    console.log('album after POST', prospect);
+    renderProspect(prospect);  //render the server's response
+  });
+  $(this).trigger("reset");
+  });
 });
+
+function buildWishlistHtml(wishlists) {
+  var wishlistText = "&ndash;";
+  wishlists.forEach(function(wishlist) {
+    wishlistText = "<li>" + wishlistText + " " + wishlist.make + " " + wishlist.model + " " + wishlist.year + " " + wishlist.color + " " + 
+    wishlist.style + "</li>"; 
+  });
+  var wishlistHtml = 
+"                       <li class = 'list=list-group-item'>" +
+"                         <h4 class='inline-header'>Wishlists:</h4>" +
+"                           <span>" + wishlistText + "</span>" +
+"                       </li>";
+  return wishlistHtml;
+}
 
 // Takes a single prospect and adds it to the page
 function renderProspect(prospect) {
@@ -55,9 +80,9 @@ function renderProspect(prospect) {
   "                <button class='btn btn-danger delete-car'>Delete Car</button>" + 
   "              </div>" +
 
-  // "              <div class='panel-footer'>" +
+  "              <div class='panel-footer'>" +
 
-  // "              </div>" +
+  "              </div>" +
 
   "            </div>" +
   "          </div>" +
