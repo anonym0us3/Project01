@@ -7,7 +7,7 @@ var MatchSchema = new Schema({
 	year: Number,
 	color: String,
 	style: String,
-	hasAutomatic: Boolean
+	// hasAutomatic: Boolean
 });
 
 var Match = mongoose.model('Match', MatchSchema);

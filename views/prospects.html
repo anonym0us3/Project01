@@ -53,9 +53,9 @@
 
             <!-- Text input-->
             <div class="form-group">
-              <label class="col-md-4 control-label" for="phone">Prospect Phone</label>
+              <label class="col-md-4 control-label" for="phone">Prospect Phone (format: ##########)</label>
               <div class="col-md-4">
-              <input id="phone" name="phone" type="text" placeholder="Telephone. eg: 5551234567" class="form-control input-md">
+              <input id="phone" name="phone" type="tel" pattern="^\d{10}$" placeholder="5551234567" class="form-control input-md">
 
               </div>
             </div>
@@ -82,7 +82,7 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="singlebutton">Save Prospect</label>
               <div class="col-md-4">
-                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Do. Or do not. There is no Try</button>
+                <button id="singlebutton" name="singlebutton" class="btn btn-primary"><strong>DO. OR DO NOT.<br>THERE IS NO TRY</strong></button>
               </div>
             </div>
           </fieldset>

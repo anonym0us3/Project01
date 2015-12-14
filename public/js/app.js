@@ -2,12 +2,14 @@
 
 $(document).ready(function() {
 	console.log("Braaaaaiiiiiiins");
+  // Showing prospects on page-load
 	$.get('/api/prospects').success(function (prospects) {
 		prospects.forEach(function(prospect) {
 			renderProspect(prospect);
 		});
 	});
 
+  // Adding a new prospect
   $('#prospect-form form').on('submit', function(e) {
   e.preventDefault();
   var formData = $(this).serialize();
@@ -19,13 +21,15 @@ $(document).ready(function() {
   $(this).trigger("reset");
   });
 
+  // Adding an additional car to a prospect's wishlist
   $('#prospects').on('click', '.add-car', function(e) {
     var id = $(this).parents('.prospect').data('prospect-id');
     console.log('id',id);
-  $('#newCarModal').data('album-id', id);
+  $('#newCarModal').data('prospect-id', id);
   $('#newCarModal').modal();
   });
 
+  // Deleting a prospect
   $('#prospects').on('click', '.delete-prospect', function(e) {
     var id = $(this).parents('.prospect').data('prospect-id');
     console.log('deleted id', id);
@@ -39,11 +43,13 @@ $(document).ready(function() {
     });
   });
 
+  // Updating a prospect's details
   $('#prospects').on('click', '.edit-prospect', function(e) {
     var id = $(this).parents('.prospect').data('prospect-id');
     console.log('id', id);
   });
 
+  // Saves 
   $('#saveNewCar').on('click', handleNewCarSubmit);
 
 });
@@ -72,7 +78,7 @@ function handleNewCarSubmit(e) {
     .success(function(wishlist) {
       console.log('wishlist', wishlist);
 
-      // re-get full album and render on page
+      // re-get full prospect and render on page
       $.get('/api/prospects/' + prospectId).success(function(prospect) {
         //remove old entry
         $('[data-prospect-id='+ prospectId + ']').remove();
@@ -95,7 +101,7 @@ function buildWishlistHtml(wishlists) {
   var wishlistText = "&ndash;";
   wishlists.forEach(function(wishlist) {
     wishlistText = "<li>" + wishlistText + " " + wishlist.make + " " + wishlist.model + " " + wishlist.year + " " + wishlist.color + " " + 
-    wishlist.style + "</li>"; 
+    wishlist.style + "</li><br>"; 
   });
   var wishlistHtml = 
 "                       <li class = 'list=list-group-item'>" +

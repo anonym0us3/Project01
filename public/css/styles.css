@@ -2,7 +2,8 @@
 	padding-top: 10px;
 	/*padding-bottom: 0px;*/
 	margin-bottom: 40px;
-	background-color: aquamarine;
+	background-color: black;
+	color: white;
 }
 
 img {
@@ -21,4 +22,8 @@ h1 {
 	background-color: gray;
 	color: white;
 	font-size: 20px;
+}
+
+#singlebutton {
+	background-color: rgb(109,135,77);
 }
