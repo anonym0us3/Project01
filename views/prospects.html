@@ -32,7 +32,7 @@
 
     <!-- BEGIN FORM SAMPLE -->
 
-    <section id='prospect-form' class="container">
+    <section id="prospect-form" class="container">
       <div class="row">
       <div class="col-md-10 col-md-offset-1">
 
@@ -46,34 +46,34 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="name">Prospect Name</label>
               <div class="col-md-4">
-              <input id="name" name="name" type="text" placeholder="" class="form-control input-md" required="" autofocus>
+              <input id="name" name="name" type="text" placeholder="Name" class="form-control input-md" required="" autofocus>
 
               </div>
             </div>
 
             <!-- Text input-->
             <div class="form-group">
-              <label class="col-md-4 control-label" for="artistName">Prospect Phone</label>
+              <label class="col-md-4 control-label" for="phone">Prospect Phone</label>
               <div class="col-md-4">
-              <input id="phone" name="phone" type="text" placeholder="" class="form-control input-md">
+              <input id="phone" name="phone" type="text" placeholder="Telephone. eg: 5551234567" class="form-control input-md">
 
               </div>
             </div>
 
             <!-- Text input-->
             <div class="form-group">
-              <label class="col-md-4 control-label" for="releaseDate">Prospect Email</label>
+              <label class="col-md-4 control-label" for="email">Prospect Email</label>
               <div class="col-md-4">
-              <input id="email" name="email" type="text" placeholder="" class="form-control input-md">
+              <input id="email" name="email" type="text" placeholder="Email address" class="form-control input-md">
 
               </div>
             </div>
 
             <!-- Text input-->
             <div class="form-group">
-              <label class="col-md-4 control-label" for="releaseDate">Prospect Address</label>
+              <label class="col-md-4 control-label" for="address">Prospect Address</label>
               <div class="col-md-4">
-              <input id="address" name="address" type="text" placeholder="" class="form-control input-md">
+              <input id="address" name="address" type="text" placeholder="Mailing address" class="form-control input-md">
 
               </div>
             </div>
@@ -97,5 +97,73 @@
 		<div class="col-md-8 col-md-offset-2" id="prospects">
 		</div>
 	</div>
+
+    <!-- begin carModal: this is not visible until you call .modal() on it -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="newCarModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Create Car</h4>
+          </div>
+          <div class="modal-body">
+            <fieldset class='form-horizontal'>
+
+            <!-- Text input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="make">Car Make</label>
+              <div class="col-md-4">
+              <input id="carMake" name="carMake" type="text" placeholder="Make" class="form-control input-md" required="">
+
+              </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="model">Car Model</label>
+              <div class="col-md-4">
+              <input id="carModel" name="carModel" type="text" placeholder="Model" class="form-control input-md">
+
+              </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="year">Car Year</label>
+              <div class="col-md-4">
+              <input id="carYear" name="carYear" type="text" placeholder="Year" class="form-control input-md" required="">
+
+              </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="color">Car Color</label>
+              <div class="col-md-4">
+              <input id="carColor" name="carColor" type="text" placeholder="Color" class="form-control input-md" required="">
+
+              </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="style">Car Style</label>
+              <div class="col-md-4">
+              <input id="carStyle" name="carStyle" type="text" placeholder="Style" class="form-control input-md" required="">
+
+              </div>
+            </div>
+
+            </fieldset>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="saveNewCar">Save changes</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
 </body>
 </html>

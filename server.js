@@ -42,7 +42,7 @@ app.get('/api/prospects', function prospectsIndex (req, res) {
 
 
 app.post('/api/prospects', function prospectCreate (req, res) {
-	console.logo('body', req.body);
+	console.log('body', req.body);
 
 	db.Prospect.create(req.body, function(err, prospect) {
 		if (err) { console.log('ERROR', err); }
@@ -53,7 +53,7 @@ app.post('/api/prospects', function prospectCreate (req, res) {
 
 
 app.get('/api/prospects/:id', function prospectShow(req, res) {
-	console.log('requested prospect id= ', req.params.id);
+	console.log('requested prospect id =', req.params.id);
 	db.Prospect.findOne({_id: req.params.id}, function(err, prospect) {
 		res.json(prospect);
 	});
@@ -69,15 +69,16 @@ app.post('/api/prospects/:prospectId/wishlists', function wishlistsCreate(req, r
 		prospect.wishlists.push(wishlist);
 		prospect.save(function(err, savedProspect) {
 			if (err) { console.log('ERROR', err); }
-			console.log('prospect with new wishlist saved: ', savedProspect);
+			console.log('prospect with new car saved:', savedProspect);
 			res.json(wishlist);
 		});
 	});
+	
 });
 
 
 app.delete('/api/prospects/:id', function prospectDelete(req, res) {
-	console.log('deleting prospect id: ', req.params.id);
+	console.log('deleting id:', req.params.id);
 	db.Prospect.remove({_id: req.params.id}, function (err) {
 		if (err) { console.log('ERROR', err); }
 		console.log('prospect deleted');

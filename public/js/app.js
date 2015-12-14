@@ -13,11 +13,32 @@ $(document).ready(function() {
   var formData = $(this).serialize();
   console.log('formData', formData);
   $.post('/api/prospects', formData, function(prospect) {
-    console.log('album after POST', prospect);
+    console.log('prospect after POST', prospect);
     renderProspect(prospect);  //render the server's response
   });
   $(this).trigger("reset");
   });
+
+  $('#prospects').on('click', '.add-car', function(e) {
+    var id = $(this).parents('.prospect').data('prospect-id');
+    console.log('id',id);
+  $('#newCarModal').data('album-id', id);
+  $('#newCarModal').modal();
+  });
+
+  $('#prospects').on('click', '.delete-car', function(e) {
+    var id = $(this).parents('.prospect').data('prospect-id');
+    console.log('deleted id', id);
+    $.ajax({
+      method: 'DELETE',
+      url: ('/api/prospects/' + id),
+      success: function () {
+        console.log("Now I am become death, Destroyer of worlds!");
+        $('#' + id).remove();
+      }
+    });
+  });
+
 });
 
 function buildWishlistHtml(wishlists) {
