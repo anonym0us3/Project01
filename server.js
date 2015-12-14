@@ -34,3 +34,64 @@ var db = require('./models');
  * JSON API Endpoints
  */
 
+app.get(('/api/prospects', function prospectIndex (req, res) {
+	db.Prospect.find({}, function(err, prospects) {
+		res.json(prospects);
+	});
+}));
+
+
+app.post('/api/prospects', function prospectCreate (req, res) {
+	console.logo('body', req.body);
+
+	db.Prospect.create(req.body, function(err, prospect) {
+		if (err) { console.log('ERROR', err); }
+		console.log(prospect);
+		res.json(prospect);
+	});
+});
+
+
+app.get('/api/prospects/:id', function prospectShow(req, res) {
+	console.log('requested prospect id= ', req.params.id);
+	db.Prospect.findOne({_id: req.params.id}, function(err, prospect) {
+		res.json(prospect);
+	});
+});
+
+
+app.post('/api/prospects/:prospectId/wishlists', function wishlistsCreate(req, res) {
+	console.log('body', req.body);
+	db.Prospect.findOne({_id: req.params.prospectId}, function(err, prospect) {
+		if (err) { console.log('ERROR', err); }
+
+		var wishlist = new db.Wishlist(req.body);
+		prospect.wishlists.push(wishlist);
+		prospect.save(function(err, savedProspect) {
+			if (err) { console.log('ERROR', err); }
+			console.log('prospect with new wishlist saved: ', savedProspect);
+			res.json(wishlist);
+		});
+	});
+});
+
+
+app.delete('/api/prospects/:id', function prospectDelete(req, res) {
+	console.log('deleting prospect id: ', req.params.id);
+	db.Prospect.remove({_id: req.params.id}, function (err) {
+		if (err) { console.log('ERROR', err); }
+		console.log('prospect deleted');
+		res.status(204).send();
+	});
+});
+
+
+
+/***********
+ * SERVER * 
+***********/
+
+// listen on port 4000
+app.listen(process.env.PORT || 4000, function () {
+	console.log('Express server is running on http://localhost:4000/');
+});
