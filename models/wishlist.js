@@ -7,7 +7,7 @@ var WishlistSchema = new Schema ( {
 	year: Number,
 	color: String,
 	style: String,
-	hasAutomatic: Boolean
+	// hasAutomatic: Boolean
 });
 
 var Wishlist = mongoose.model('Wishlist', WishlistSchema);
