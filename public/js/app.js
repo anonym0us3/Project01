@@ -9,6 +9,7 @@ $(document).ready(function() {
 		});
 	});
 
+
   // Adding a new prospect
   $('#prospect-form form').on('submit', function(e) {
   e.preventDefault();
@@ -21,7 +22,7 @@ $(document).ready(function() {
   $(this).trigger("reset");
   });
 
-  // Adding an additional car to a prospect's wishlist
+  // Adding an additional vehicle to a prospect's wishlist
   $('#prospects').on('click', '.add-car', function(e) {
     var id = $(this).parents('.prospect').data('prospect-id');
     console.log('id',id);
@@ -29,7 +30,8 @@ $(document).ready(function() {
   $('#newCarModal').modal();
   });
 
-  // Deleting a prospect
+
+  // Deleting a prospect & their associated vehicle(s) wishlist
   $('#prospects').on('click', '.delete-prospect', function(e) {
     var id = $(this).parents('.prospect').data('prospect-id');
     console.log('deleted id', id);
@@ -43,16 +45,61 @@ $(document).ready(function() {
     });
   });
 
+
   // Updating a prospect's details
-  $('#prospects').on('click', '.edit-prospect', function(e) {
+  $('#prospects').on('click', '.edit-prospect', handleProspectEdit);
+    // var id = $(this).parents('.prospect').data('prospect-id');
+    // console.log('attempting to edit id', id);
+
+
+  // Saving a prospect's updated details
+  $('#prospects').on('click', '.save-edits', function(e) {
     var id = $(this).parents('.prospect').data('prospect-id');
     console.log('id', id);
+    $('#' + id + '.save-edits').hide();
+    $('#' + id + '.edit-prospect').show();
   });
 
   // Saves 
   $('#saveNewCar').on('click', handleNewCarSubmit);
 
 });
+
+
+function getProspectRowById(id) {
+  return $('[data-prospect-id=' + id + ']');
+}
+
+
+function handleProspectEdit (e) {
+  var prospectId = $(this).parents('.prospect').data('prospect-id');
+  var $prospectRow = getProspectRowById(prospectId);
+
+  console.log('attempting to edit id', prospectId);
+
+  $(this).parent().find('btn').hide();
+  $(this).parent().find('.save-edits').show();
+
+  // replace current spans with inputs
+  var prospectName = $prospectRow.find('span.prospect-name').text();
+  $prospectRow.find('span.prospect-name').html('<input class="edit-prospect-name" value="' + name + '"></input>');
+
+  var prospectPhone = $prospectRow.find('span.prospect-phone').text();
+  $prospectRow.find('span.prospect-phone').html('<input class="edit-prospect-phone" value="' + phone + '"></input>');
+
+  var prospectEmail = $prospectRow.find('span.prospect-email').text();
+  $prospectRow.find('span.prospect-email').html('<input class="edit-prospect-email" value="' + email + '"></input>');
+
+  var prospectAddress = $prospectRow.find('span.prospect-address').text();
+  $prospectRow.find('span.prospect-address').html('<input class="edit-prospect-address" value="' + address + '"></input>');
+
+}
+
+
+function handleSaveProspectChanges(e) {
+  
+}
+
 
 // handles the modal fields and POSTing the form to the server
 function handleNewCarSubmit(e) {
@@ -124,22 +171,24 @@ function renderProspect(prospect) {
   "                <div class='row'>" +
   "                  <div class='col-md-9 col-xs-12'>" +
   "                    <ul class='list-group'>" +
-  "                      <li class='list-group-item'>" +
-  "                        <h4 class='inline-header'>Prospect Name:</h4>" +
-  "                        <span class='prospect-name'>" + prospect.name + "</span>" +
-  "                      </li>" +
-  "                      <li class='list-group-item'>" +
-  "                        <h4 class='inline-header'>Prospect Phone:</h4>" +
-  "                        <span class='prospect-phone'>" + prospect.phone + "</span>" +
-  "                      </li>" +
-  "                      <li class='list-group-item'>" +
-  "                        <h4 class='inline-header'>Prospect Email:</h4>" +
-  "                        <span class='prospect-email'>" + prospect.email + "</span>" +
-  "                      </li>" +
-  "                      <li class='list-group-item'>" +
-  "                        <h4 class='inline-header'>Prospect Address:</h4>" +
-  "                        <span class='prospect-address'>" + prospect.address + "</span>" +
-  "                      </li>" +
+  "                       <div id=basicDetails>" + 
+  "                          <li class='list-group-item'>" +
+  "                          <h4 class='inline-header'>Prospect Name:</h4>" +
+  "                          <span class='prospect-name'>" + prospect.name + "</span>" +
+  "                        </li>" +
+  "                        <li class='list-group-item'>" +
+  "                          <h4 class='inline-header'>Prospect Phone:</h4>" +
+  "                          <span class='prospect-phone'>" + prospect.phone + "</span>" +
+  "                        </li>" +
+  "                        <li class='list-group-item'>" +
+  "                          <h4 class='inline-header'>Prospect Email:</h4>" +
+  "                          <span class='prospect-email'>" + prospect.email + "</span>" +
+  "                        </li>" +
+  "                       <li class='list-group-item'>" +
+  "                          <h4 class='inline-header'>Prospect Address:</h4>" +
+  "                          <span class='prospect-address'>" + prospect.address + "</span>" +
+  "                        </li>" +
+  "                       </div>" +
 
   buildWishlistHtml(prospect.wishlists) +
 
@@ -153,7 +202,8 @@ function renderProspect(prospect) {
 
   "              <div class='panel-footer'>" +
   "                <button class='btn btn-primary add-car'>Add Car</button>" +
-  "                <button class='btn btn-warning edit-prospect'>Edit Prospect</button>" + 
+  "                <button class='btn btn-warning edit-prospect' id=" + prospect._id + ">Edit Prospect</button>" +
+  "                <button class='btn btn-success save-edits' id=" + prospect._id + ">Save Changes</button>" + 
   "                <button class='btn btn-danger delete-prospect'>Delete Prospect</button>" + 
   "              </div>" +
 
@@ -166,4 +216,8 @@ function renderProspect(prospect) {
   "          <!-- end one prospect -->";
 
   $('#prospects').prepend(prospectHtml);
+ }
+
+ function editProspect(taco) {
+  alert('you clicked el-button-o');
  }

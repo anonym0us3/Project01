@@ -1,9 +1,11 @@
+
 .jumbotron {
 	padding-top: 10px;
-	/*padding-bottom: 0px;*/
-	margin-bottom: 40px;
+	padding-bottom: 20px;
+	margin-bottom: 30px;
 	background-color: black;
 	color: white;
+	text-align: center;
 }
 
 img {
@@ -26,4 +28,8 @@ h1 {
 
 #singlebutton {
 	background-color: rgb(109,135,77);
+}
+
+.save-edits {
+	display: none;
 }
