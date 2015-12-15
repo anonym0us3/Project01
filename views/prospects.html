@@ -22,7 +22,7 @@
 </head>
 
 <body>
-	<div class="jumbotron">
+	<div class="jumbotron	">
 		<h1>Welcome to carTopiary</h1>
 		<img src="/images/left.jpg" height=300px>
 		<img src="/images/centerleft.jpg" height=300px>
@@ -53,9 +53,9 @@
 
             <!-- Text input-->
             <div class="form-group">
-              <label class="col-md-4 control-label" for="phone">Prospect Phone (format: ##########)</label>
+              <label class="col-md-4 control-label" for="phone">Prospect Phone (format: 5551112222)</label>
               <div class="col-md-4">
-              <input id="phone" name="phone" type="tel" pattern="^\d{10}$" placeholder="1234567890" class="form-control input-md">
+              <input id="phone" name="phone" type="tel" placeholder="1234567890" class="form-control input-md">
 
               </div>
             </div>
@@ -104,7 +104,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Please describe the car you are intereested in:</h4>
+            <h4 class="modal-title">Please describe the car you are interested in:</h4>
           </div>
           <div class="modal-body">
             <fieldset class='form-horizontal'>
@@ -129,9 +129,9 @@
 
             <!-- Text input-->
             <div class="form-group">
-              <label class="col-md-4 control-label" for="year">Car Year</label>
+              <label class="col-md-4 control-label" for="year">Car Year (format: ####)</label>
               <div class="col-xs-8">
-              <input id="carYear" name="carYear" type="text" placeholder="eg: 2006" class="form-control input-md" required="">
+              <input id="carYear" name="carYear" type="number" maxlength="4" placeholder="eg: 2006" class="form-control input-md" required="">
 
               </div>
             </div>
@@ -159,7 +159,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id="saveNewCar">Save changes</button>
+            <button type="button" class="btn btn-primary" id="saveNewCar">Save new car</button>
           </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
