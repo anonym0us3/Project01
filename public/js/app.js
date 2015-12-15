@@ -76,7 +76,7 @@ function handleProspectEdit (e) {
   $prospectRow.find('span.prospect-name').html('<input class="edit-prospect-name" value="' + prospectName + '"></input>');
 
   var prospectPhone = $prospectRow.find('span.prospect-phone').text();
-  $prospectRow.find('span.prospect-phone').html('<input class="edit-prospect-phone" type="tel" pattern="^\d{10}$" value="' + prospectPhone + '"></input>');
+  $prospectRow.find('span.prospect-phone').html('<input class="edit-prospect-phone" type="number" value="' + prospectPhone + '"></input>');
 
   var prospectEmail = $prospectRow.find('span.prospect-email').text();
   $prospectRow.find('span.prospect-email').html('<input class="edit-prospect-email" value="' + prospectEmail + '"></input>');
@@ -159,7 +159,7 @@ function handleNewCarSubmit(e) {
 function buildWishlistHtml(wishlists) {
   var wishlistText = "&ndash;";
   wishlists.forEach(function(wishlist) {
-    wishlistText = "<li>" + wishlistText + " " + wishlist.make + " " + wishlist.model + " " + wishlist.year + " " + wishlist.color + " " + 
+    wishlistText = wishlistText + "<li>" + " " + wishlist.make + " " + wishlist.model + " " + wishlist.year + " " + wishlist.color + " " + 
     wishlist.style + "</li><br>"; 
   });
   var wishlistHtml = 
@@ -217,7 +217,7 @@ function generateProspectHtml(prospect) {
   "              <div class='panel-footer'>" +
   "                <button class='btn btn-primary add-car'>Add Car</button>" +
   "                <button class='btn btn-warning edit-prospect'>Edit Prospect</button>" +
-  "                <button class='btn btn-success save-edits'>Save Changes</button>" + 
+  "                <button class='btn btn-success btn-lg save-edits'>Save Changes</button>" + 
   "                <button class='btn btn-danger delete-prospect'>Delete Prospect</button>" + 
   "              </div>" +
 

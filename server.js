@@ -45,13 +45,21 @@ var db = require("./models");
    });
  });
 
+// Show all prospects
 app.get('/api/prospects', function prospectsIndex (req, res) {
 	db.Prospect.find({}, function(err, prospects) {
 		res.json(prospects);
 	});
 });
 
+// Show a single wishlist for a single prospect by their respective IDs
+app.get('/api/prospects/:id/wishlists/:id', function wishlistsIndex (req, res) {
+	db.Prospect.findOne({_id: req.params.id}, function(err, wishlists) {
+		res.json(wishlists);
+	});
+});
 
+// Creating a new prospect
 app.post('/api/prospects', function prospectCreate (req, res) {
 	console.log('body', req.body);
 
@@ -62,7 +70,7 @@ app.post('/api/prospects', function prospectCreate (req, res) {
 	});
 });
 
-
+// Show a single prospect by its ID
 app.get('/api/prospects/:id', function prospectShow(req, res) {
 	console.log('requested prospect id =', req.params.id);
 	db.Prospect.findOne({_id: req.params.id}, function(err, prospect) {
@@ -70,7 +78,7 @@ app.get('/api/prospects/:id', function prospectShow(req, res) {
 	});
 });
 
-
+// Creating a new wishlist (vehicle) entry for a particular prospect
 app.post('/api/prospects/:prospectId/wishlists', function wishlistsCreate(req, res) {
 	console.log('body', req.body);
 	db.Prospect.findOne({_id: req.params.prospectId}, function(err, prospect) {
@@ -87,7 +95,7 @@ app.post('/api/prospects/:prospectId/wishlists', function wishlistsCreate(req, r
 
 });
 
-
+// Delete a single prospect by its ID
 app.delete('/api/prospects/:id', function prospectDelete(req, res) {
 	console.log('deleting id:', req.params.id);
 	db.Prospect.remove({_id: req.params.id}, function (err) {
@@ -97,7 +105,7 @@ app.delete('/api/prospects/:id', function prospectDelete(req, res) {
 	});
 });
 
-
+// Update a single prospect by its ID
 app.put('/api/prospects/:id', function updateProspect(req, res) {
   console.log('updating id ', req.params.id);
   console.log('received body ', req.body);
