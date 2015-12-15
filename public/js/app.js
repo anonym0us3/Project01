@@ -216,8 +216,8 @@ function generateProspectHtml(prospect) {
 
   "              <div class='panel-footer'>" +
   "                <button class='btn btn-primary add-car'>Add Car</button>" +
-  "                <button class='btn btn-warning edit-prospect' id=" + prospect._id + ">Edit Prospect</button>" +
-  "                <button class='btn btn-success save-edits' id=" + prospect._id + ">Save Changes</button>" + 
+  "                <button class='btn btn-warning edit-prospect'>Edit Prospect</button>" +
+  "                <button class='btn btn-success save-edits'>Save Changes</button>" + 
   "                <button class='btn btn-danger delete-prospect'>Delete Prospect</button>" + 
   "              </div>" +
 
