@@ -165,7 +165,7 @@ function buildWishlistHtml(wishlists) {
   var wishlistHtml = 
 "                       <li class = 'list=list-group-item'>" +
 "                         <h4 class='inline-header'>Wishlists:</h4>" +
-"                           <span>" + wishlistText + "</span>" +
+"                           <span>" + "<a href='https:\/\/www.google.com\/' target='_blank'>" + wishlistText + "</a>" + "</span>" +
 "                       </li>";
   return wishlistHtml;
 }
@@ -215,7 +215,7 @@ function generateProspectHtml(prospect) {
   "              </div>" + // end of panel-body
 
   "              <div class='panel-footer'>" +
-  "                <button class='btn btn-primary add-car'>Add Car</button>" +
+  "                <button class='btn btn-primary add-car'>Add Car to Wishlist</button>" +
   "                <button class='btn btn-warning edit-prospect'>Edit Prospect</button>" +
   "                <button class='btn btn-success btn-lg save-edits'>Save Changes</button>" + 
   "                <button class='btn btn-danger delete-prospect'>Delete Prospect</button>" + 
