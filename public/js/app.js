@@ -45,23 +45,14 @@ $(document).ready(function() {
     });
   });
 
+  // Saving new vehicle submission to prospect's wishlist
+  $('#saveNewCar').on('click', handleNewCarSubmit);
 
   // Updating a prospect's details
   $('#prospects').on('click', '.edit-prospect', handleProspectEdit);
-    // var id = $(this).parents('.prospect').data('prospect-id');
-    // console.log('attempting to edit id', id);
-
 
   // Saving a prospect's updated details
-  $('#prospects').on('click', '.save-edits', function(e) {
-    var id = $(this).parents('.prospect').data('prospect-id');
-    console.log('id', id);
-    $('#' + id + '.save-edits').hide();
-    $('#' + id + '.edit-prospect').show();
-  });
-
-  // Saves 
-  $('#saveNewCar').on('click', handleNewCarSubmit);
+  $('#prospects').on('click', '.save-edits', handleSaveProspectChanges);
 
 });
 
@@ -77,7 +68,7 @@ function handleProspectEdit (e) {
 
   console.log('attempting to edit id', prospectId);
 
-  $(this).parent().find('btn').hide();
+  $(this).parent().find('.edit-prospect').hide();
   $(this).parent().find('.save-edits').show();
 
   // replace current spans with inputs
@@ -97,7 +88,28 @@ function handleProspectEdit (e) {
 
 
 function handleSaveProspectChanges(e) {
-  
+  var prospectId = $(this).parents('.prospect').data('prospect-id');
+  var $prospectRow = getProspectRowById(prospectId);
+
+  var data = {
+    name: $prospectRow.find('.edit-prospect-name').val(),
+    phone: $prospectRow.find('.edit-prospect-phone').val(),
+    email: $prospectRow.find('.edit-prospect-email').val(),
+    address: $prospectRow.find('.edit-prospect-address').val()
+  };
+
+  $.ajax({
+    method: 'PUT',
+    url: '/api/prospects/' + prospectId,
+    data: data,
+    success: function(data) {
+      console.log(data);
+      $prospectRow.replaceWith(generateProspectHtml(data));
+    }
+  });
+
+  $(this).parent().find('.save-edits').hide();
+  $(this).parent().find('.edit-prospect').show();
 }
 
 
@@ -158,9 +170,11 @@ function buildWishlistHtml(wishlists) {
   return wishlistHtml;
 }
 
-// Takes a single prospect and adds it to the page
-function renderProspect(prospect) {
-  console.log('rendering prospect:', prospect);
+// // Takes a single prospect and adds it to the page
+// function renderProspect(prospect) {
+//   console.log('rendering prospect:', prospect);
+
+function generateProspectHtml(prospect) {
 
   var prospectHtml =
   "        <div class='row prospect' data-prospect-id='" + prospect._id + "' id='" + prospect._id + "'>" +
@@ -215,7 +229,8 @@ function renderProspect(prospect) {
   "          </div>" +
   "          <!-- end one prospect -->";
 
-  $('#prospects').prepend(prospectHtml);
+  // $('#prospects').prepend(prospectHtml);
+    return prospectHtml;
  }
 
  function editProspect(taco) {
