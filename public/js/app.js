@@ -233,6 +233,10 @@ function generateProspectHtml(prospect) {
     return prospectHtml;
  }
 
- function editProspect(taco) {
-  alert('you clicked el-button-o');
- }
+// this function takes a single prospect and renders it to the page
+function renderProspect(prospect) {
+  var html = generateProspectHtml(prospect);
+  console.log('rendering prospect:', prospect);
+
+  $('#prospects').prepend(html);
+}

@@ -34,6 +34,17 @@ var db = require("./models");
  * JSON API Endpoints
  */
 
+ app.get('/api', function api_index (req, res){
+   res.json({
+     message: "Welcome to carTopiary!",
+     documentation_url: "https://github.com/anonym0us3/Project01/blob/master/README.md",
+     // base_url: "http://tunely.herokuapp.com",
+     endpoints: [
+       {method: "GET", path: "/api", description: "Describes available endpoints"}
+     ]
+   });
+ });
+
 app.get('/api/prospects', function prospectsIndex (req, res) {
 	db.Prospect.find({}, function(err, prospects) {
 		res.json(prospects);
@@ -73,7 +84,7 @@ app.post('/api/prospects/:prospectId/wishlists', function wishlistsCreate(req, r
 			res.json(wishlist);
 		});
 	});
-	
+
 });
 
 
@@ -86,6 +97,23 @@ app.delete('/api/prospects/:id', function prospectDelete(req, res) {
 	});
 });
 
+
+app.put('/api/prospects/:id', function updateProspect(req, res) {
+  console.log('updating id ', req.params.id);
+  console.log('received body ', req.body);
+
+  db.Prospect.findOne({_id: req.params.id}, function(err, foundProspect) {
+    if (err) { console.log('error', err); }
+    foundProspect.name = req.body.name;
+    foundProspect.phone = req.body.phone;
+    foundProspect.email = req.body.email;
+    foundProspect.address = req.body.address;
+    foundProspect.save(function(err, saved) {
+      if(err) { console.log('ERROR', err); }
+      res.json(saved);
+    });
+  });
+});
 
 
 /***********
