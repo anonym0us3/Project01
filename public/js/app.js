@@ -71,7 +71,7 @@ function handleEditWishlistsClick(e) {
   $.get('/api/prospects/' + prospectId + '/wishlists').success(function(wishlists) {
     var formHtml = generateEditWishlistsModalHtml(wishlists);
     $('#editCarsModalBody').html(formHtml);
-    $('#editCarsModal').modal('show');    
+    $('#editCarsModal').modal();    
   });
 }
 
@@ -80,7 +80,7 @@ function handleEditWishlistsClick(e) {
 function generateEditWishlistsModalHtml(wishlists) {
   var html = '';
   wishlists.forEach(function(wishlist) {
-    html += '<form class="form-inline" id="' + wishlist._id + '"' +
+    html += '<form class="form-inline" id="' + wishlist._id + '">' +
             ' <div class="form-group">' +
               '<input type="text" class="form-control wishlist-make" value="' + wishlist.make + '">' +
             '</div>' +
@@ -96,8 +96,8 @@ function generateEditWishlistsModalHtml(wishlists) {
             ' <div class="form-group">' +
               '<input type="text" class="form-control wishlist-style" value="' + wishlist.style + '">' +
             '</div>' +
-            '<div class="form-group">' +
-              '<button class="btn btn-danger" data-wishlist-id="' + wishlist._id + '">x<button>' +
+              '<button class="btn btn-danger" data-wishlist-id="' + wishlist._id + '">X</button>' +
+            '<hr>' +  
             '</form>';
   });
 
