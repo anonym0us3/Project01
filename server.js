@@ -67,12 +67,12 @@ app.get('/api/prospects/:id/wishlists', function wishlistIndex (req, res) {
 	});
 });
 
-// Show a single wishlist for a single prospect by their respective IDs
-app.get('/api/prospects/:prospectId/wishlists/:id', function wishlistIndex (req, res) {
-	db.Prospect.findOne({_id: req.params.id}, function(err, customer) {
-		res.json(customer.wishlists);
-	});
-});
+// // Show a single wishlist for a single prospect by their respective IDs
+// app.get('/api/prospects/:prospectId/wishlists/:id', function wishlistIndex (req, res) {
+// 	db.Prospect.findOne({_id: req.params.id}, function(err, customer) {
+// 		res.json(customer.wishlists);
+// 	});
+// });
 
 // Creating a new prospect
 app.post('/api/prospects', function prospectCreate (req, res) {

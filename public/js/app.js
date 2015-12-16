@@ -159,14 +159,14 @@ function handleNewCarSubmit(e) {
 function buildWishlistHtml(wishlists) {
   var wishlistText = "&ndash;";
   wishlists.forEach(function(wishlist) {
-    wishlistText = wishlistText + "<li>" + " " + wishlist.make + " " + wishlist.model + " " + wishlist.year + " " + wishlist.color + " " + 
+    wishlistText = "<li>" + wishlistText + " " + wishlist.make + " " + wishlist.model + " " + wishlist.year + " " + wishlist.color + " " + 
     wishlist.style + "</li><br>"; 
   });
   var wishlistHtml = 
-"                       <li class = 'list=list-group-item'>" +
-"                         <h4 class='inline-header'>Wishlists:</h4>" +
+"                       <h4 class='inline-header'>Desired cars:</h4>" +
+"                         <li class = 'list=list-group-item'>" +
 "                           <span>" + "<a href='https:\/\/www.google.com\/' target='_blank'>" + wishlistText + "</a>" + "</span>" +
-"                       </li>";
+"                         </li>";
   return wishlistHtml;
 }
 
@@ -203,11 +203,11 @@ function generateProspectHtml(prospect) {
   "                          <span class='prospect-address'>" + prospect.address + "</span>" +
   "                        </li>" +
   "                       </div>" +
-
+  "                    </ul>" +
   buildWishlistHtml(prospect.wishlists) +
 
 
-  "                    </ul>" +
+
   "                  </div>" +
   "                </div>" +
   "                <!-- end of prospect internal row -->" +
