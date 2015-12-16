@@ -45,6 +45,7 @@ $(document).ready(function() {
     });
   });
 
+
   // Saving new vehicle submission to prospect's wishlist
   $('#saveNewCar').on('click', handleNewCarSubmit);
 
@@ -54,7 +55,51 @@ $(document).ready(function() {
   // Saving a prospect's updated details
   $('#prospects').on('click', '.save-edits', handleSaveProspectChanges);
 
+  // Click action for editing a single prospect's wishlists
+  $('#prospects').on('click', '.edit-wishlists', handleEditWishlistsClick);
+
 });
+
+// End of Document Ready
+
+
+// Function for what to do when clicking on edit desired cars button
+function handleEditWishlistsClick(e) {
+  var prospectId = $(this).parents('prospect').data('prospect-id');
+  // getting all cars (wishlists) for this single prospect
+  $.get('/api/prospects/' + prospectId + '/wishlists').success(function(wishlists) {
+    var formHtml = generateEditCarsModalHtml(wishlists);
+    $('editCarsModalBody').html(formHtml);
+    $('editCarsModal').modal('show');    
+  });
+}
+
+
+// Takes an array of car data from the wishlist and produces an Edit form for the data
+function generateEditWishlistsModalHtml(wishlists) {
+  var html = '';
+  songs.forEach(function(wishlist) {
+    html += '<form class="form-inline" id="' + wishlist.id + '"' +
+            ' <div class="form-group">' +
+              '<input type="text" class="form-control wishlist-make" value="' + wishlist.make + '">' +
+            '</div>' +
+            ' <div class="form-group">' +
+              '<input type="text" class="form-control wishlist-model" value="' + wishlist.model + '">' +
+            '</div>' +
+            ' <div class="form-group">' +
+              '<input type="text" class="form-control wishlist-year" value="' + wishlist.year + '">' +
+            '</div>' +
+            ' <div class="form-group">' +
+              '<input type="text" class="form-control wishlist-color" value="' + wishlist.color + '">' +
+            '</div>' +
+            ' <div class="form-group">' +
+              '<input type="text" class="form-control wishlist-style" value="' + wishlist.style + '">' +
+            '</div>' +
+            '</form>';
+  });
+
+  return html;
+}
 
 
 function getProspectRowById(id) {
@@ -213,8 +258,8 @@ function generateProspectHtml(prospect) {
   "              </div>" + // end of panel-body
 
   "              <div class='panel-footer'>" +
-  "                <button class='btn btn-primary add-car'>Add Car to Wishlist</button>" +
-  "                <button class='btn btn-info edit-wishlists'>Edit Wishlist</button>" +
+  "                <button class='btn btn-primary add-car'>Add Car to list</button>" +
+  "                <button class='btn btn-info edit-wishlists'>Edit Desired Cars</button>" +
   "                <button class='btn btn-warning edit-prospect'>Edit Prospect</button>" +
   "                <button class='btn btn-success btn-lg save-edits'>Save Changes</button>" + 
   "                <button class='btn btn-danger delete-prospect'>Delete Prospect</button>" + 
