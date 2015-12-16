@@ -65,7 +65,8 @@ $(document).ready(function() {
 
 // Function for what to do when clicking on edit desired cars button
 function handleEditWishlistsClick(e) {
-  var prospectId = $(this).parents('prospect').data('prospect-id');
+  var prospectId = $(this).parents('.prospect').data('prospect-id');
+  console.log("clicked on:" + prospectId);
   // getting all cars (wishlists) for this single prospect
   $.get('/api/prospects/' + prospectId + '/wishlists').success(function(wishlists) {
     var formHtml = generateEditWishlistsModalHtml(wishlists);
@@ -79,7 +80,7 @@ function handleEditWishlistsClick(e) {
 function generateEditWishlistsModalHtml(wishlists) {
   var html = '';
   wishlists.forEach(function(wishlist) {
-    html += '<form class="form-inline" id="' + wishlist.id + '"' +
+    html += '<form class="form-inline" id="' + wishlist._id + '"' +
             ' <div class="form-group">' +
               '<input type="text" class="form-control wishlist-make" value="' + wishlist.make + '">' +
             '</div>' +
@@ -253,7 +254,6 @@ function generateProspectHtml(prospect) {
   "                       </div>" +
   "                    </ul>" +
   buildWishlistHtml(prospect.wishlists) +
-
 
 
   "                  </div>" +
