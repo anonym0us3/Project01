@@ -214,6 +214,7 @@ function generateProspectHtml(prospect) {
 
   "              <div class='panel-footer'>" +
   "                <button class='btn btn-primary add-car'>Add Car to Wishlist</button>" +
+  "                <button class='btn btn-info edit-wishlists'>Edit Wishlist</button>" +
   "                <button class='btn btn-warning edit-prospect'>Edit Prospect</button>" +
   "                <button class='btn btn-success btn-lg save-edits'>Save Changes</button>" + 
   "                <button class='btn btn-danger delete-prospect'>Delete Prospect</button>" + 
