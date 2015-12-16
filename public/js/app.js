@@ -135,7 +135,7 @@ function handleNewCarSubmit(e) {
 
   $.post(postUrl, formData)
     .success(function(wishlist) {
-      console.log('wishlist', wishlist);
+      // console.log('wishlist', wishlist);
 
       // re-get full prospect and render on page
       $.get('/api/prospects/' + prospectId).success(function(prospect) {
@@ -157,13 +157,13 @@ function handleNewCarSubmit(e) {
 }
 
 function buildWishlistHtml(wishlists) {
-  console.log(wishlists);
+  // console.log(wishlists);
   var wishlistText = "";
   wishlists.forEach(function(wishlist) {
     wishlistText += "<li id=" + wishlist._id + ">" + "<a href='https:\/\/www.google.com\/' target='_blank'>" +
                   " " + wishlist.make + " " + wishlist.model + " " + wishlist.year + " " + wishlist.color + " " + 
                   wishlist.style + "</a></li>";
-                  console.log(wishlistText); 
+                  // console.log(wishlistText); 
   });
   var wishlistHtml = 
 "                       <h4 class='inline-header'>Desired cars:</h4>" +
