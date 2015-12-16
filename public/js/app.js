@@ -82,21 +82,26 @@ function generateEditWishlistsModalHtml(wishlists) {
   wishlists.forEach(function(wishlist) {
     html += '<form class="form-inline" id="' + wishlist._id + '">' +
             ' <div class="form-group">' +
+            '<label class="col-md-4 control-label" for="make">Make</label>'+
               '<input type="text" class="form-control wishlist-make" value="' + wishlist.make + '">' +
             '</div>' +
             ' <div class="form-group">' +
+            '<label class="col-md-4 control-label" for="model">Model</label>'+
               '<input type="text" class="form-control wishlist-model" value="' + wishlist.model + '">' +
             '</div>' +
             ' <div class="form-group">' +
+            '<label class="col-md-4 control-label" for="year">Year</label>'+
               '<input type="number" class="form-control wishlist-year" value="' + wishlist.year + '">' +
             '</div>' +
             ' <div class="form-group">' +
+            '<label class="col-md-4 control-label" for="color">Color</label>'+
               '<input type="text" class="form-control wishlist-color" value="' + wishlist.color + '">' +
             '</div>' +
             ' <div class="form-group">' +
+            '<label class="col-md-4 control-label" for="style">Style</label>'+
               '<input type="text" class="form-control wishlist-style" value="' + wishlist.style + '">' +
             '</div>' +
-              '<button class="btn btn-danger" data-wishlist-id="' + wishlist._id + '">X</button>' +
+              '<button class="btn btn-danger" data-wishlist-id="' + wishlist._id + '">Delete Car</button>' +
             '<hr>' +  
             '</form>';
   });
@@ -124,7 +129,7 @@ function handleProspectEdit (e) {
   $prospectRow.find('span.prospect-name').html('<input class="edit-prospect-name" value="' + prospectName + '"></input>');
 
   var prospectPhone = $prospectRow.find('span.prospect-phone').text();
-  $prospectRow.find('span.prospect-phone').html('<input class="edit-prospect-phone" type="number" value="' + prospectPhone + '"></input>');
+  $prospectRow.find('span.prospect-phone').html('<input class="edit-prospect-phone" type="number" pattern="^\d{10}$" value="' + prospectPhone + '"></input>');
 
   var prospectEmail = $prospectRow.find('span.prospect-email').text();
   $prospectRow.find('span.prospect-email').html('<input class="edit-prospect-email" value="' + prospectEmail + '"></input>');
