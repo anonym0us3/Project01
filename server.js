@@ -25,6 +25,7 @@ var db = require("./models");
  * HTML Endpoints
  */
 
+
  app.get('/', function homepage (req, res) {
  	res.sendFile(__dirname + '/views/prospects.html');
  });
@@ -33,6 +34,7 @@ var db = require("./models");
  /*
  * JSON API Endpoints
  */
+
 
  app.get('/api', function api_index (req, res){
    res.json({
@@ -45,6 +47,7 @@ var db = require("./models");
    });
  });
 
+
 // Reading all prospects
 app.get('/api/prospects', function prospectsIndex (req, res) {
 	db.Prospect.find({}, function(err, prospects) {
@@ -52,27 +55,6 @@ app.get('/api/prospects', function prospectsIndex (req, res) {
 	});
 });
 
-// Reading a single prospect by its ID
-app.get('/api/prospects/:id', function prospectShow(req, res) {
-	console.log('requested prospect id =', req.params.id);
-	db.Prospect.findOne({_id: req.params.id}, function(err, prospect) {
-		res.json(prospect);
-	});
-});
-
-// Reading the vehicles (wishlists) for a single prospect by its ID
-app.get('/api/prospects/:id/wishlists', function wishlistIndex (req, res) {
-	db.Prospect.findOne({_id: req.params.id}, function(err, customer) {
-		res.json(customer.wishlists);
-	});
-});
-
-// // Reading a single wishlist for a single prospect by their respective IDs
-// app.get('/api/prospects/:prospectId/wishlists/:id', function wishlistIndex (req, res) {
-// 	db.Prospect.findOne({_id: req.params.id}, function(err, customer) {
-// 		res.json(customer.wishlists);
-// 	});
-// });
 
 // Creating a new prospect
 app.post('/api/prospects', function prospectCreate (req, res) {
@@ -84,6 +66,27 @@ app.post('/api/prospects', function prospectCreate (req, res) {
 		res.json(prospect);
 	});
 });
+
+
+// Reading a single prospect by its ID
+app.get('/api/prospects/:id', function prospectShow(req, res) {
+	console.log('requested prospect id =', req.params.id);
+	db.Prospect.findOne({_id: req.params.id}, function(err, prospect) {
+		res.json(prospect);
+	});
+});
+
+
+// Reading the vehicles (wishlists) for a single prospect by its ID
+app.get('/api/prospects/:id/wishlists', function wishlistIndex (req, res) {
+	db.Prospect.findOne({_id: req.params.id}, function(err, customer) {
+		res.json(customer.wishlists);
+	});
+});
+
+
+
+
 
 
 // Creating a new vehicle (wishlist) entry for a single prospect
