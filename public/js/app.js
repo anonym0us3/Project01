@@ -211,7 +211,7 @@ function buildWishlistHtml(wishlists) {
                   // console.log(wishlistText); 
   });
   var wishlistHtml = 
-"                       <h4 class='inline-header'>Desired cars:</h4>" +
+"                       <h4 class='inline-header'>Desired cars list:</h4>" +
 "                       <ul>" + wishlistText + "</ul>";
   return wishlistHtml;
 }
@@ -258,7 +258,7 @@ function generateProspectHtml(prospect) {
   "              </div>" + // end of panel-body
 
   "              <div class='panel-footer'>" +
-  "                <button class='btn btn-primary add-car'>Add Car to list</button>" +
+  "                <button class='btn btn-primary add-car'>Add Car to List</button>" +
   "                <button class='btn btn-info edit-wishlists'>Edit Desired Cars</button>" +
   "                <button class='btn btn-warning edit-prospect'>Edit Prospect</button>" +
   "                <button class='btn btn-success btn-lg save-edits'>Save Changes</button>" + 
