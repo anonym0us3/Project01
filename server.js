@@ -45,14 +45,14 @@ var db = require("./models");
    });
  });
 
-// Show all prospects
+// Reading all prospects
 app.get('/api/prospects', function prospectsIndex (req, res) {
 	db.Prospect.find({}, function(err, prospects) {
 		res.json(prospects);
 	});
 });
 
-// Show a single prospect by its ID
+// Reading a single prospect by its ID
 app.get('/api/prospects/:id', function prospectShow(req, res) {
 	console.log('requested prospect id =', req.params.id);
 	db.Prospect.findOne({_id: req.params.id}, function(err, prospect) {
@@ -60,14 +60,14 @@ app.get('/api/prospects/:id', function prospectShow(req, res) {
 	});
 });
 
-// Show just the wishlists for a single prospect by its ID
+// Reading the vehicles (wishlists) for a single prospect by its ID
 app.get('/api/prospects/:id/wishlists', function wishlistIndex (req, res) {
 	db.Prospect.findOne({_id: req.params.id}, function(err, customer) {
 		res.json(customer.wishlists);
 	});
 });
 
-// // Show a single wishlist for a single prospect by their respective IDs
+// // Reading a single wishlist for a single prospect by their respective IDs
 // app.get('/api/prospects/:prospectId/wishlists/:id', function wishlistIndex (req, res) {
 // 	db.Prospect.findOne({_id: req.params.id}, function(err, customer) {
 // 		res.json(customer.wishlists);
@@ -86,7 +86,7 @@ app.post('/api/prospects', function prospectCreate (req, res) {
 });
 
 
-// Creating a new wishlist (vehicle) entry for a particular prospect
+// Creating a new vehicle (wishlist) entry for a single prospect
 app.post('/api/prospects/:id/wishlists', function wishlistsCreate(req, res) {
 	console.log('body', req.body);
 	db.Prospect.findOne({_id: req.params.id}, function(err, prospect) {
