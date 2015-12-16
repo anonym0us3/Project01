@@ -87,7 +87,7 @@ function generateEditWishlistsModalHtml(wishlists) {
               '<input type="text" class="form-control wishlist-model" value="' + wishlist.model + '">' +
             '</div>' +
             ' <div class="form-group">' +
-              '<input type="text" class="form-control wishlist-year" value="' + wishlist.year + '">' +
+              '<input type="number" class="form-control wishlist-year" value="' + wishlist.year + '">' +
             '</div>' +
             ' <div class="form-group">' +
               '<input type="text" class="form-control wishlist-color" value="' + wishlist.color + '">' +
@@ -95,6 +95,8 @@ function generateEditWishlistsModalHtml(wishlists) {
             ' <div class="form-group">' +
               '<input type="text" class="form-control wishlist-style" value="' + wishlist.style + '">' +
             '</div>' +
+            '<div class="form-group">' +
+              '<button class="btn btn-danger" data-wishlist-id="' + wishlist._id + '">x<button>' +
             '</form>';
   });
 
@@ -201,6 +203,8 @@ function handleNewCarSubmit(e) {
     });
 }
 
+
+// Insert comment here later
 function buildWishlistHtml(wishlists) {
   // console.log(wishlists);
   var wishlistText = "";
@@ -216,7 +220,8 @@ function buildWishlistHtml(wishlists) {
   return wishlistHtml;
 }
 
-// // Takes a single prospect and adds it to the page
+
+// Takes a single prospect and adds it to the page
 function generateProspectHtml(prospect) {
 
   var prospectHtml =
