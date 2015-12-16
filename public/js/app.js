@@ -157,23 +157,21 @@ function handleNewCarSubmit(e) {
 }
 
 function buildWishlistHtml(wishlists) {
-  var wishlistText = "&ndash;";
+  console.log(wishlists);
+  var wishlistText = "";
   wishlists.forEach(function(wishlist) {
-    wishlistText = "<li>" + wishlistText + " " + wishlist.make + " " + wishlist.model + " " + wishlist.year + " " + wishlist.color + " " + 
-    wishlist.style + "</li><br>"; 
+    wishlistText += "<li id=" + wishlist._id + ">" + "<a href='https:\/\/www.google.com\/' target='_blank'>" +
+                  " " + wishlist.make + " " + wishlist.model + " " + wishlist.year + " " + wishlist.color + " " + 
+                  wishlist.style + "</a></li>";
+                  console.log(wishlistText); 
   });
   var wishlistHtml = 
 "                       <h4 class='inline-header'>Desired cars:</h4>" +
-"                         <li class = 'list=list-group-item'>" +
-"                           <span>" + "<a href='https:\/\/www.google.com\/' target='_blank'>" + wishlistText + "</a>" + "</span>" +
-"                         </li>";
+"                       <ul>" + wishlistText + "</ul>";
   return wishlistHtml;
 }
 
 // // Takes a single prospect and adds it to the page
-// function renderProspect(prospect) {
-//   console.log('rendering prospect:', prospect);
-
 function generateProspectHtml(prospect) {
 
   var prospectHtml =
@@ -229,7 +227,6 @@ function generateProspectHtml(prospect) {
   "          </div>" +
   "          <!-- end one prospect -->";
 
-  // $('#prospects').prepend(prospectHtml);
     return prospectHtml;
  }
 
