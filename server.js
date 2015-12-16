@@ -86,12 +86,12 @@ app.get('/api/prospects/:id/wishlists', function wishlistIndex (req, res) {
 
 
 // Showing the cars (wishlist items) for a single prospect
-app.get('/api/prospects/:id/wishlists', function wishlistShow (req, res) {
-	// console.log('requested prospect id=', req.params.id);
-	db.Prospect.findOne({_id: req.params.id}, function(err, prospect) {
-		res.json(prospect.wishlists);
-	});
-});
+// app.get('/api/prospects/:id/wishlists', function wishlistShow (req, res) {
+// 	// console.log('requested prospect id=', req.params.id);
+// 	db.Prospect.findOne({_id: req.params.id}, function(err, prospect) {
+// 		res.json(prospect.wishlists);
+// 	});
+// });
 
 
 // Creating a new vehicle (wishlist) entry for a single prospect
