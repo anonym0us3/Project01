@@ -53,26 +53,26 @@ app.get('/api/prospects', function prospectsIndex (req, res) {
 });
 
 // Show a single prospect by its ID
-app.get('/api/prospects/:prospectId', function prospectShow(req, res) {
+app.get('/api/prospects/:id', function prospectShow(req, res) {
 	console.log('requested prospect id =', req.params.id);
 	db.Prospect.findOne({_id: req.params.id}, function(err, prospect) {
 		res.json(prospect);
 	});
 });
 
-// Show a single wishlist for a single prospect by their respective IDs
-app.get('/api/prospects/:prospectId/wishlists', function wishlistIndex (req, res) {
+// Show just the wishlists for a single prospect by its ID
+app.get('/api/prospects/:id/wishlists', function wishlistIndex (req, res) {
 	db.Prospect.findOne({_id: req.params.id}, function(err, customer) {
 		res.json(customer.wishlists);
 	});
 });
 
-// // Show a single wishlist for a single prospect by their respective IDs
-// app.get('/api/prospects/:prospectId/wishlists/:wishlistId', function wishlistIndex (req, res) {
-// 	db.Prospect.findOne({_id: req.params.id}, function(err, customer) {
-// 		res.json(customer.wishlists);
-// 	});
-// });
+// Show a single wishlist for a single prospect by their respective IDs
+app.get('/api/prospects/:prospectId/wishlists/:id', function wishlistIndex (req, res) {
+	db.Prospect.findOne({_id: req.params.id}, function(err, customer) {
+		res.json(customer.wishlists);
+	});
+});
 
 // Creating a new prospect
 app.post('/api/prospects', function prospectCreate (req, res) {
@@ -87,9 +87,9 @@ app.post('/api/prospects', function prospectCreate (req, res) {
 
 
 // Creating a new wishlist (vehicle) entry for a particular prospect
-app.post('/api/prospects/:prospectId/wishlists', function wishlistsCreate(req, res) {
+app.post('/api/prospects/:id/wishlists', function wishlistsCreate(req, res) {
 	console.log('body', req.body);
-	db.Prospect.findOne({_id: req.params.prospectId}, function(err, prospect) {
+	db.Prospect.findOne({_id: req.params.id}, function(err, prospect) {
 		if (err) { console.log('ERROR', err); }
 
 		var wishlist = new db.Wishlist(req.body);
