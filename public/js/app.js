@@ -68,9 +68,9 @@ function handleEditWishlistsClick(e) {
   var prospectId = $(this).parents('prospect').data('prospect-id');
   // getting all cars (wishlists) for this single prospect
   $.get('/api/prospects/' + prospectId + '/wishlists').success(function(wishlists) {
-    var formHtml = generateEditCarsModalHtml(wishlists);
-    $('editCarsModalBody').html(formHtml);
-    $('editCarsModal').modal('show');    
+    var formHtml = generateEditWishlistsModalHtml(wishlists);
+    $('#editCarsModalBody').html(formHtml);
+    $('#editCarsModal').modal('show');    
   });
 }
 
@@ -78,7 +78,7 @@ function handleEditWishlistsClick(e) {
 // Takes an array of car data from the wishlist and produces an Edit form for the data
 function generateEditWishlistsModalHtml(wishlists) {
   var html = '';
-  songs.forEach(function(wishlist) {
+  wishlists.forEach(function(wishlist) {
     html += '<form class="form-inline" id="' + wishlist.id + '"' +
             ' <div class="form-group">' +
               '<input type="text" class="form-control wishlist-make" value="' + wishlist.make + '">' +
