@@ -79,14 +79,19 @@ app.get('/api/prospects/:id', function prospectShow(req, res) {
 
 // Reading the vehicles (wishlists) for a single prospect by its ID
 app.get('/api/prospects/:id/wishlists', function wishlistIndex (req, res) {
-	db.Prospect.findOne({_id: req.params.id}, function(err, customer) {
-		res.json(customer.wishlists);
+	db.Prospect.findOne({_id: req.params.id}, function(err, prospect) {
+		res.json(prospect.wishlists);
 	});
 });
 
 
-
-
+// Showing the cars (wishlist items) for a single prospect
+app.get('/api/prospects/:id/wishlists', function wishlistShow (req, res) {
+	// console.log('requested prospect id=', req.params.id);
+	db.Prospect.findOne({_id: req.params.id}, function(err, prospect) {
+		res.json(prospect.wishlists);
+	});
+});
 
 
 // Creating a new vehicle (wishlist) entry for a single prospect
