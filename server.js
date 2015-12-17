@@ -160,7 +160,21 @@ app.put('api/prospects/:prospectId/wishlists/:id', function updateCar(req, res) 
 app.delete('api/prospects/:prospectId/wishlists/:id', function deleteCar(req, res) {
 	var prospectId = req.params.prospectId;
 	var wishlistId = req.params.id;
+	console.log(req.params);
+	db.Prospect.findOne({_id: prospectId}, function (err, foundProspect) {
+		if (err) { console.log('ERROR', err); }
+		// Finding the individial car embedded within prospect
+		var foundWishlist = foundProspect.wishlists.id(wishlistId);
 
+		// Deleting the found car
+		foundWishlist.remove();
+		// Saving the delete
+		foundProspect.save(function(err, saved) {
+			if (err) { console.log('ERROR', err); }
+			res.json(saved);
+		});
+	});
+});
 
 
 /***********
