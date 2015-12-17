@@ -101,6 +101,7 @@ function handleEditWishlistsClick(e) {
   console.log("clicked on:" + prospectId);
   // getting all cars (wishlists) for this single prospect
   $.get('/api/prospects/' + prospectId + '/wishlists').success(function(wishlists) {
+    console.log(wishlists);
     var formHtml = generateEditWishlistsModalHtml(wishlists, prospectId);
     $('#editCarsModalBody').html(formHtml);
     $('#editCarsModal').modal();    
@@ -172,8 +173,12 @@ function updateWishlistsList(prospectId) {
     // Building a new <li> item
     var replacementLi = buildWishlistHtml(someProspects);
     // Replacing the <li> with the cars in it
-    var $originalLi = $('[data-prospect-id=' + prospectId + '] .wishlists-list');
-    $($originalLi).replaceWith(replacementLi);
+    console.log("daniel here:",replacementLi);
+    $('[data-prospect-id=' + prospectId + '] .carsHeader').remove();
+    $('[data-prospect-id=' + prospectId + '] .carsList').remove();
+    $('[data-prospect-id=' + prospectId + '] .stuffContainer').append(replacementLi);
+
+    // $($originalLi).text(replacementLi);
   });
 }
 
@@ -291,8 +296,8 @@ function buildWishlistHtml(wishlists) {
                   // console.log(wishlistText); 
   });
   var wishlistHtml = 
-"                       <h4 class='inline-header'>Desired cars list:</h4>" +
-"                       <ul>" + wishlistText + "</ul>";
+"                       <h4 class='inline-header carsHeader'>Desired cars list:</h4>" +
+"                       <ul class='carsList'>" + wishlistText + "</ul>";
   return wishlistHtml;
 }
 
@@ -307,7 +312,7 @@ function generateProspectHtml(prospect) {
   "              <div class='panel-body'>" +
   "              <!-- begin prospect internal row -->" +
   "                <div class='row'>" +
-  "                  <div class='col-md-9 col-xs-12'>" +
+  "                  <div class='col-md-9 col-xs-12 stuffContainer'>" +
   "                    <ul class='list-group'>" +
   "                       <div id=basicDetails>" + 
   "                          <li class='list-group-item'>" +
