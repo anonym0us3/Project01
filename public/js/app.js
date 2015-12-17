@@ -127,6 +127,15 @@ function handleDeleteCarClick(e) {
     url: requestUrl,
     success: function(data) {
       $thisWishlist.closest('form').remove();
+      // Re-getting cars again (since 1's been deleted)
+      $.get('/api/prospects/' + prospectId + '/wishlists/').success(function(someProspects) {
+        console.log('replacement prospects', someProspects);
+        // Building a new <li> item
+        var replacementLi = buildWishlistHtml(someProspects);
+        // Replacing the <li> with the songs in it
+        var $originalLi = $('[data-prospect-id=' + prospectId + '] .wishlists-list');
+        $(originalLi).replaceWith(replacementLi);
+      });
     }
   });
 }
@@ -150,7 +159,7 @@ function handleProspectEdit (e) {
   $prospectRow.find('span.prospect-name').html('<input class="edit-prospect-name" value="' + prospectName + '"></input>');
 
   var prospectPhone = $prospectRow.find('span.prospect-phone').text();
-  $prospectRow.find('span.prospect-phone').html('<input class="edit-prospect-phone" type="number" pattern="^\d{10}$" value="' + prospectPhone + '"></input>');
+  $prospectRow.find('span.prospect-phone').html('<input class="edit-prospect-phone" type="tel" pattern="^\d{10}$" value="' + prospectPhone + '"></input>');
 
   var prospectEmail = $prospectRow.find('span.prospect-email').text();
   $prospectRow.find('span.prospect-email').html('<input class="edit-prospect-email" value="' + prospectEmail + '"></input>');
@@ -236,7 +245,7 @@ function buildWishlistHtml(wishlists) {
   // console.log(wishlists);
   var wishlistText = "";
   wishlists.forEach(function(wishlist) {
-    wishlistText += "<li id=" + wishlist._id + ">" + "<a href='https:\/\/www.google.com\/' target='_blank'>" +
+    wishlistText += "<li class='wishlists-list' id=" + wishlist._id + ">" + "<a href='https:\/\/www.google.com\/' target='_blank'>" +
                   " " + wishlist.make + " " + wishlist.model + " " + wishlist.year + " " + wishlist.color + " " + 
                   wishlist.style + "</a></li>";
                   // console.log(wishlistText); 
