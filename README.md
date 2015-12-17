@@ -22,10 +22,10 @@ Endpoint | Method | Route | Data
 --- | --- | --- | ---
 *Homepage* | GET | / | Serves the homepage
 *API* | GET | /api | Basic API details
-*All Prospects' data* (aka customers) | GET | /api/prospects | shows the name, phone number, email address, physical address for all prospects, as well as all of their Wishlists (aka desired car[s])
+*All Prospects' data* (aka customers) | GET | /api/prospects | Shows the name, phone number, email address, physical address of all customers, as well as all of their desired car[s]
 *New Prospect* | POST | /api/prospects | Creates new prospect and prepends to the page
-*Single Prospect* | GET | /api/prospects/:id) | shows the name, phone, email & physical addresses for a single prospect
-*Wishlists* (aka customer's desired car[s]) | GET | /api/prospects/:id/wishlists | shows make, model, year, color, style for all cars for a single customer
+*Single Prospect* | GET | /api/prospects/:id) | Shows the name, phone, email & physical addresses for a single prospect
+*Wishlists* (aka customer's desired car[s]) | GET | /api/prospects/:id/wishlists | Shows make, model, year, color, style for all cars for a single customer
 *New vehicle* | POST | /api/prospects/:id/wishlists | Adds single car to an existing customer
 *Deleting customer* | DELETE | /api/prospects/:id | Deletes a single customer (and all of its associated cars) from the page
 *Update a customer* | PUT | /api/prospects/:id | Form-data'izes a customer and then pushes the update to the page
