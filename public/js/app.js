@@ -60,11 +60,38 @@ $(document).ready(function() {
   // Click action for deleting a single car (wishlist item) from a single prospect
   $('#editCarsModal').on('click', '.delete-car', handleDeleteCarClick);
 
+  // Submit action for updating a single (or multiple) car's(s') data for a single prospect
+  $('#editCarsModal').on('submit', 'form', handleUpdateCar);
+
 });
 
 
 
 // End of Document Ready
+
+
+// AJAX for handling updating (PUT) a single (or multiple?) car's/cars' data
+function handleUpdateCar(e) {
+  e.preventDefault();
+  // Gets the values from the car in the modal
+  var prospectId = $(this).attr('id');
+  var make = $(this).find('.wishlist-make').val();
+  var model = $(this).find('.wishlist-model').val();
+  var year = $(this).find('.wishlist-year').val();
+  var color = $(this).find('.wishlist-color').val();
+  var style = $(this).find('.wishlist-style').val();
+  var wishlistId = $(this).find('.delete-car').attr('data-wishlist-id');
+  var url = '/api/prospects/' + prospectId + '/wishlists/' + wishlistId;
+  console.log('PUT', url, make, model, year, color, style);
+  $.ajax({
+    method: 'PUT',
+    url: url,
+    data: { make: make, model: model, year: year, color: color, style: style },
+    success: function (data) {
+      updateWishlistsList(prospectId);
+    }
+  });
+}
 
 
 // Function for what to do when clicking on edit desired cars button
@@ -107,7 +134,12 @@ function generateEditWishlistsModalHtml(wishlists, prospectId) {
             '<label class="col-md-4 control-label" for="style">Style</label>'+
               '<input type="text" class="form-control wishlist-style" value="' + wishlist.style + '">' +
             '</div>' +
+            ' <div class="form-group">' +
               '<button class="btn btn-danger delete-car" data-wishlist-id="' + wishlist._id + '">Delete Car</button>' +
+            '</div>' +
+            ' <div class="form-group">' +
+              '<button type="submit" class="btn btn-success save-car" data-wishlist-id"' + wishlist._id + '">Save changes</span></button>' +
+            '</div>' +  
             '<hr>' +  
             '</form>';
   });
@@ -254,9 +286,8 @@ function buildWishlistHtml(wishlists) {
   // console.log(wishlists);
   var wishlistText = "";
   wishlists.forEach(function(wishlist) {
-    wishlistText += "<li class='wishlists-list' id=" + wishlist._id + ">" + "<a href='https:\/\/www.google.com\/' target='_blank'>" +
-                  " " + wishlist.make + " " + wishlist.model + " " + wishlist.year + " " + wishlist.color + " " + 
-                  wishlist.style + "</a></li>";
+    wishlistText += "<li class='wishlists-list' id=" + wishlist._id + ">" + " " + wishlist.make + " " + wishlist.model + " " +
+                  wishlist.year + " " + wishlist.color + " " + wishlist.style + "</a></li>";
                   // console.log(wishlistText); 
   });
   var wishlistHtml = 
