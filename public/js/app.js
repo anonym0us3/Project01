@@ -127,24 +127,32 @@ function handleDeleteCarClick(e) {
     url: requestUrl,
     success: function(data) {
       $thisWishlist.closest('form').remove();
-      // Re-getting cars again (since 1's been deleted)
-      $.get('/api/prospects/' + prospectId + '/wishlists/').success(function(someProspects) {
-        console.log('replacement prospects', someProspects);
-        // Building a new <li> item
-        var replacementLi = buildWishlistHtml(someProspects);
-        // Replacing the <li> with the songs in it
-        var $originalLi = $('[data-prospect-id=' + prospectId + '] .wishlists-list');
-        $(originalLi).replaceWith(replacementLi);
-      });
+      updateWishlistsList(prospectId);
     }
   });
 }
 
 
+function updateWishlistsList(prospectId) {
+  // Re-getting cars again (since 1's been deleted)
+  $.get('/api/prospects/' + prospectId + '/wishlists/').success(function(someProspects) {
+    console.log('replacement prospects', someProspects);
+    // Building a new <li> item
+    var replacementLi = buildWishlistHtml(someProspects);
+    // Replacing the <li> with the cars in it
+    var $originalLi = $('[data-prospect-id=' + prospectId + '] .wishlists-list');
+    $($originalLi).replaceWith(replacementLi);
+  });
+}
+
+
+// Takes a customer (aka prospect) id (from mongo customer DB) and returns the row in which that customer exists
 function getProspectRowById(id) {
   return $('[data-prospect-id=' + id + ']');
 }
 
+
+// Creates the UPDATE forms for customer (aka prospect) model when using UPDATE route
 function handleProspectEdit (e) {
   var prospectId = $(this).parents('.prospect').data('prospect-id');
   var $prospectRow = getProspectRowById(prospectId);
@@ -170,6 +178,7 @@ function handleProspectEdit (e) {
 }
 
 
+// Processes the newly-supplied data for a customer and PUTS it back to the DB
 function handleSaveProspectChanges(e) {
   var prospectId = $(this).parents('.prospect').data('prospect-id');
   var $prospectRow = getProspectRowById(prospectId);
