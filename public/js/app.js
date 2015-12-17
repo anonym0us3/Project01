@@ -3,12 +3,11 @@
 $(document).ready(function() {
 	console.log("Braaaaaiiiiiiins");
   // Showing prospects on page-load
-	$.get('/api/prospects').success(function (prospects) {
-		prospects.forEach(function(prospect) {
-			renderProspect(prospect);
-		});
-	});
-
+  $.get('/api/prospects').success(function (prospects) {
+    prospects.forEach(function(prospect) {
+      renderProspect(prospect);
+    });
+  });
 
   // Adding a new prospect
   $('#prospect-form form').on('submit', function(e) {
@@ -62,6 +61,8 @@ $(document).ready(function() {
   $('#editCarsModal').on('click', '.delete-car', handleDeleteCarClick);
 
 });
+
+
 
 // End of Document Ready
 
@@ -120,8 +121,7 @@ function handleDeleteCarClick(e) {
   var wishlistId = $(this).data('wishlist-id');
   var prospectId = $(this).closest('form').attr('id');
   var $thisWishlist = $(this);
-  var requestUrl = ('api/prospects/' + prospectId + '/wishlists/' + wishlistId);
-  console.log('DELETE ', requestUrl);
+  var requestUrl = ('/api/prospects/' + prospectId + '/wishlists/' + wishlistId);
   $.ajax({
     method: 'DELETE',
     url: requestUrl,
@@ -132,11 +132,9 @@ function handleDeleteCarClick(e) {
 }
 
 
-
 function getProspectRowById(id) {
   return $('[data-prospect-id=' + id + ']');
 }
-
 
 function handleProspectEdit (e) {
   var prospectId = $(this).parents('.prospect').data('prospect-id');

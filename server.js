@@ -134,7 +134,7 @@ app.put('/api/prospects/:id', function updateProspect(req, res) {
 
 
 // Updating single car (wishlist item) for a single prospect
-app.put('api/prospects/:prospectId/wishlists/:id', function updateCar(req, res) {
+app.put('/api/prospects/:prospectId/wishlists/:id', function updateCar(req, res) {
 	var prospectId = req.params.prospectId;
 	var wishlistId = req.params.id;
 	db.Prospect.findOne({_id: prospectId}, function (err, foundProspect) {
@@ -157,7 +157,7 @@ app.put('api/prospects/:prospectId/wishlists/:id', function updateCar(req, res) 
 
 
 // Deleting a single car (wishlist item) from a single prospect
-app.delete('api/prospects/:prospectId/wishlists/:id', function deleteCar(req, res) {
+app.delete('/api/prospects/:prospectId/wishlists/:id', function deleteCar(req, res) {
 	var prospectId = req.params.prospectId;
 	var wishlistId = req.params.id;
 	console.log(req.params);
@@ -167,6 +167,7 @@ app.delete('api/prospects/:prospectId/wishlists/:id', function deleteCar(req, re
 		var foundWishlist = foundProspect.wishlists.id(wishlistId);
 
 		// Deleting the found car
+		console.log('Deleted car ', foundWishlist);
 		foundWishlist.remove();
 		// Saving the delete
 		foundProspect.save(function(err, saved) {
