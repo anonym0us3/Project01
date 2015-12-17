@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
-mongoose.connect("mongodb://localhost/cartopiary");
+mongoose.connect( process.env.MONGOLAB_URI ||
+	              process.env.MONGOHQ_URL || 
+	              "mongodb://localhost/cartopiary");
 
 //Prospects db
 var Prospect = require('./prospect');
