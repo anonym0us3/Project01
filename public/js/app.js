@@ -58,6 +58,9 @@ $(document).ready(function() {
   // Click action for editing a single prospect's wishlists
   $('#prospects').on('click', '.edit-wishlists', handleEditWishlistsClick);
 
+  // Click action for deleting a single car (wishlist item) from a single prospect
+  $('#editCarsModal').on('click', '.delete-car', handleDeleteCarClick);
+
 });
 
 // End of Document Ready
@@ -65,11 +68,12 @@ $(document).ready(function() {
 
 // Function for what to do when clicking on edit desired cars button
 function handleEditWishlistsClick(e) {
+  e.preventDefault();
   var prospectId = $(this).parents('.prospect').data('prospect-id');
   console.log("clicked on:" + prospectId);
   // getting all cars (wishlists) for this single prospect
   $.get('/api/prospects/' + prospectId + '/wishlists').success(function(wishlists) {
-    var formHtml = generateEditWishlistsModalHtml(wishlists);
+    var formHtml = generateEditWishlistsModalHtml(wishlists, prospectId);
     $('#editCarsModalBody').html(formHtml);
     $('#editCarsModal').modal();    
   });
@@ -77,10 +81,11 @@ function handleEditWishlistsClick(e) {
 
 
 // Takes an array of car data from the wishlist and produces an Edit form for the data
-function generateEditWishlistsModalHtml(wishlists) {
+// {From tunely: "we want to have both the prospectId and wishlistId available". Don't yet know why}
+function generateEditWishlistsModalHtml(wishlists, prospectId) {
   var html = '';
   wishlists.forEach(function(wishlist) {
-    html += '<form class="form-inline" id="' + wishlist._id + '">' +
+    html += '<form class="form-inline" id="' + prospectId + '">' +
             ' <div class="form-group">' +
             '<label class="col-md-4 control-label" for="make">Make</label>'+
               '<input type="text" class="form-control wishlist-make" value="' + wishlist.make + '">' +
@@ -101,13 +106,24 @@ function generateEditWishlistsModalHtml(wishlists) {
             '<label class="col-md-4 control-label" for="style">Style</label>'+
               '<input type="text" class="form-control wishlist-style" value="' + wishlist.style + '">' +
             '</div>' +
-              '<button class="btn btn-danger" data-wishlist-id="' + wishlist._id + '">Delete Car</button>' +
+              '<button class="btn btn-danger delete-car" data-wishlist-id="' + wishlist._id + '">Delete Car</button>' +
             '<hr>' +  
             '</form>';
   });
 
   return html;
 }
+
+
+function handleDeleteCarClick(e) {
+  e.preventDefault();
+  var wishlistId = $(this).data('wishlist-id');
+  var prospectId = $(this).closest('form').attr('id');
+  var $thisWishlist = $(this);
+  var requestUrl = ('api/prospects/' + prospectId + '/wishlists' + wishlistId);
+  console.log('DELETE ', requestUrl);
+}
+
 
 
 function getProspectRowById(id) {
