@@ -1,4 +1,4 @@
-# carTopiary (Project01)
+# carTopiary (Project01) :car:
 
 heroku link: http://aqueous-island-4247.herokuapp.com
 github link: https://github.com/anonym0us3/Project01
@@ -8,7 +8,7 @@ github link: https://github.com/anonym0us3/Project01
 
 **carTopiary Overview:**
 
-/play rollout
+
 
 Full CRUD Single-Page App with mongoose and Express.
 
