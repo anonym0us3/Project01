@@ -85,15 +85,6 @@ app.get('/api/prospects/:id/wishlists', function wishlistIndex (req, res) {
 });
 
 
-// Showing the cars (wishlist items) for a single prospect
-// app.get('/api/prospects/:id/wishlists', function wishlistShow (req, res) {
-// 	// console.log('requested prospect id=', req.params.id);
-// 	db.Prospect.findOne({_id: req.params.id}, function(err, prospect) {
-// 		res.json(prospect.wishlists);
-// 	});
-// });
-
-
 // Creating a new vehicle (wishlist) entry for a single prospect
 app.post('/api/prospects/:id/wishlists', function wishlistsCreate(req, res) {
 	console.log('body', req.body);
@@ -111,6 +102,7 @@ app.post('/api/prospects/:id/wishlists', function wishlistsCreate(req, res) {
 
 });
 
+
 // Delete a single prospect by its ID
 app.delete('/api/prospects/:id', function prospectDelete(req, res) {
 	console.log('deleting id:', req.params.id);
@@ -120,6 +112,7 @@ app.delete('/api/prospects/:id', function prospectDelete(req, res) {
 		res.status(204).send();
 	});
 });
+
 
 // Update a single prospect by its ID
 app.put('/api/prospects/:id', function updateProspect(req, res) {
@@ -138,6 +131,36 @@ app.put('/api/prospects/:id', function updateProspect(req, res) {
     });
   });
 });
+
+
+// Updating single car (wishlist item) for a single prospect
+app.put('api/prospects/:prospectId/wishlists/:id', function updateCar(req, res) {
+	var prospectId = req.params.prospectId;
+	var wishlistId = req.params.id;
+	db.Prospect.findOne({_id: prospectId}, function (err, foundProspect) {
+		// Finding the individial car embedded within prospect
+		var foundWishlist = foundProspect.wishlists.id(wishlistId);
+		foundWishlist.make = req.body.make;
+		foundWishlist.model = req.body.model;
+		foundWishlist.year = req.body.year;
+		foundWishlist.color = req.body.color;				
+		foundWishlist.style = req.body.style;
+
+
+		// Saving the updates/changes
+		foundProspect.save(function(err, saved) {
+			if (err) { console.log('ERROR', err); }
+			res.json(saved);
+		});
+	});
+});
+
+
+// Deleting a single car (wishlist item) from a single prospect
+app.delete('api/prospects/:prospectId/wishlists/:id', function deleteCar(req, res) {
+	var prospectId = req.params.prospectId;
+	var wishlistId = req.params.id;
+
 
 
 /***********
