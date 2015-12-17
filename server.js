@@ -85,7 +85,7 @@ app.get('/api/prospects/:id/wishlists', function wishlistIndex (req, res) {
 });
 
 
-// Creating a new vehicle (wishlist) entry for a single prospect
+// Create a new vehicle (wishlist item) for a single prospect
 app.post('/api/prospects/:id/wishlists', function wishlistsCreate(req, res) {
 	console.log('body', req.body);
 	db.Prospect.findOne({_id: req.params.id}, function(err, prospect) {
@@ -133,12 +133,12 @@ app.put('/api/prospects/:id', function updateProspect(req, res) {
 });
 
 
-// Updating single car (wishlist item) for a single prospect
+// Update a single car (wishlist item) for a single prospect
 app.put('/api/prospects/:prospectId/wishlists/:id', function updateCar(req, res) {
 	var prospectId = req.params.prospectId;
 	var wishlistId = req.params.id;
 	db.Prospect.findOne({_id: prospectId}, function (err, foundProspect) {
-		// Finding the individial car embedded within prospect
+		// Find the individial car embedded within the prospect
 		var foundWishlist = foundProspect.wishlists.id(wishlistId);
 		foundWishlist.make = req.body.make;
 		foundWishlist.model = req.body.model;
@@ -147,7 +147,7 @@ app.put('/api/prospects/:prospectId/wishlists/:id', function updateCar(req, res)
 		foundWishlist.style = req.body.style;
 
 
-		// Saving the updates/changes
+		// Save the updates/changes
 		foundProspect.save(function(err, saved) {
 			if (err) { console.log('ERROR', err); }
 			res.json(saved);
@@ -156,20 +156,20 @@ app.put('/api/prospects/:prospectId/wishlists/:id', function updateCar(req, res)
 });
 
 
-// Deleting a single car (wishlist item) from a single prospect
+// Delete a single car (wishlist item) from a single prospect
 app.delete('/api/prospects/:prospectId/wishlists/:id', function deleteCar(req, res) {
 	var prospectId = req.params.prospectId;
 	var wishlistId = req.params.id;
 	console.log(req.params);
 	db.Prospect.findOne({_id: prospectId}, function (err, foundProspect) {
 		if (err) { console.log('ERROR', err); }
-		// Finding the individial car embedded within prospect
+		// Find the individial car embedded within the prospect
 		var foundWishlist = foundProspect.wishlists.id(wishlistId);
 
-		// Deleting the found car
+		// Delete the found car
 		console.log('Deleted car ', foundWishlist);
 		foundWishlist.remove();
-		// Saving the delete
+		// Save the delete
 		foundProspect.save(function(err, saved) {
 			if (err) { console.log('ERROR', err); }
 			res.json(saved);

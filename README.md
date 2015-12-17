@@ -1,18 +1,22 @@
-# carTopiary (Project01) :car:
+# :oncoming_automobile: :blue_car: :car: carTopiary (Project01) :car: :blue_car: :oncoming_automobile:
 
-heroku link: http://aqueous-island-4247.herokuapp.com
-github link: https://github.com/anonym0us3/Project01
+[heroku link](http://aqueous-island-4247.herokuapp.com)
+
+[github link](https://github.com/anonym0us3/Project01)
 
 ![screenshot]
 (http://i.imgur.com/doKKMmM.jpg)
 
-**carTopiary Overview:**
 
+
+##carTopiary Overview:**
 
 
 Full CRUD Single-Page App with mongoose and Express.
 
-**Prerequisites:**
+
+
+##Prerequisites
 
 * jQuery, AJAX
 * Express server, static assets
@@ -21,6 +25,19 @@ Full CRUD Single-Page App with mongoose and Express.
 * Bootstrap - for modals
 * CRUD with mongoose
 * mongoose embedded relationships
+
+
+##Completion
+
+- [x] Build a website!
+- [x] Have a CRUD'able model
+	- [x] Have a CRUD'able **sub**model!
+- [ ] Integrate a 3rd-party API
+- [ ] Integrate Authentication
+
+
+
+##API Endpoints
 
 Endpoint | Method | Route | Data
 --- | --- | --- | ---

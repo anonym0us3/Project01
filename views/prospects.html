@@ -40,60 +40,58 @@
 
     <section id="prospect-form" class="container">
       <div class="row">
-      <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-10 col-md-offset-1">
 
-        <form class="form-horizontal">
-          <fieldset>
+          <form class="form-horizontal">
+            <fieldset>
 
-            <!-- Form Name -->
-            <legend>Add New Prospect</legend>
+              <!-- Form Name -->
+              <legend>Add New Prospect</legend>
 
-            <!-- Text input-->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="name">Prospect Name</label>
-              <div class="col-md-4">
-              <input id="name" name="name" type="text" placeholder="Name" class="form-control input-md" required="" autofocus>
-
+              <!-- Text input-->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="name">Prospect Name</label>
+                  <div class="col-md-4">
+                    <input id="name" name="name" type="text" placeholder="Name" class="form-control input-md" required="" autofocus>
+                  </div>
               </div>
-            </div>
 
-            <!-- Text input-->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="phone">Prospect Phone (format: 5551112222)</label>
-              <div class="col-md-4">
-              <input id="phone" name="phone" type="tel" pattern="^\d{10}$" placeholder="1234567890" class="form-control input-md">
-
+              <!-- Text input-->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="phone">Prospect Phone (format: 5551112222)</label>
+                  <div class="col-md-4">
+                    <input id="phone" name="phone" type="tel" pattern="^\d{10}$" placeholder="1234567890" class="form-control input-md">
+                  </div>
               </div>
-            </div>
 
-            <!-- Text input-->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="email">Prospect Email</label>
-              <div class="col-md-4">
-              <input id="email" name="email" type="text" placeholder="Email address" class="form-control input-md">
-
+              <!-- Text input-->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="email">Prospect Email</label>
+                  <div class="col-md-4">
+                    <input id="email" name="email" type="text" placeholder="Email address" class="form-control input-md">
+                  </div>
               </div>
-            </div>
 
-            <!-- Text input-->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="address">Prospect Address</label>
-              <div class="col-md-4">
-              <input id="address" name="address" type="text" placeholder="Mailing address" class="form-control input-md">
-
+              <!-- Text input-->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="address">Prospect Address</label>
+                  <div class="col-md-4">
+                    <input id="address" name="address" type="text" placeholder="Mailing address" class="form-control input-md">
+                  </div>
               </div>
-            </div>
 
-            <!-- Button -->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="singlebutton">Save Prospect</label>
-              <div class="col-md-4">
-                <button id="singlebutton" name="singlebutton" class="btn btn-primary"><strong>DO. OR DO NOT.<br>THERE IS NO TRY</strong></button>
+              <!-- Button -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="singlebutton">Save Prospect</label>
+                <div class="col-md-4">
+                  <button id="singlebutton" name="singlebutton" class="btn btn-primary"><strong>DO. OR DO NOT.<br>THERE IS NO TRY</strong></button>
+                </div>
               </div>
-            </div>
-          </fieldset>
-        </form>
-      </div>
+
+            </fieldset>
+          </form>
+
+        </div>
       </div>
     </section>
 
@@ -104,7 +102,7 @@
 		</div>
 	</div>
 
-    <!-- begin carModal: this is not visible until you call .modal() on it -->
+    <!-- Modal to add a single car to a specific prospect -->
     <div class="modal fade" tabindex="-1" role="dialog" id="newCarModal">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -118,46 +116,41 @@
             <!-- Text input-->
             <div class="form-group">
               <label class="col-md-4 control-label" for="make" autofocus>Car Make</label>
-              <div class="col-xs-8">
-              <input id="carMake" name="carMake" type="text" placeholder="eg: AM General" class="form-control input-md" autofocus required="">
-
-              </div>
+                <div class="col-xs-8">
+                  <input id="carMake" name="carMake" type="text" placeholder="eg: AM General" class="form-control input-md" autofocus required="">
+                </div>
             </div>
 
             <!-- Text input-->
             <div class="form-group">
               <label class="col-md-4 control-label" for="model">Car Model</label>
-              <div class="col-xs-8">
-              <input id="carModel" name="carModel" type="text" placeholder="eg: Hummer H1 Alpha" class="form-control input-md">
-
-              </div>
+                <div class="col-xs-8">
+                  <input id="carModel" name="carModel" type="text" placeholder="eg: Hummer H1 Alpha" class="form-control input-md">
+                </div>
             </div>
 
             <!-- Text input-->
             <div class="form-group">
               <label class="col-md-4 control-label" for="year">Car Year (format: ####)</label>
-              <div class="col-xs-8">
-              <input id="carYear" name="carYear" type="number" maxlength="4" placeholder="eg: 2006" class="form-control input-md" required="">
-
-              </div>
+                <div class="col-xs-8">
+                  <input id="carYear" name="carYear" type="number" maxlength="4" placeholder="eg: 2006" class="form-control input-md" required="">
+                </div>
             </div>
 
             <!-- Text input-->
             <div class="form-group">
               <label class="col-md-4 control-label" for="color">Car Color</label>
-              <div class="col-xs-8">
-              <input id="carColor" name="carColor" type="text" placeholder="eg: Matte Black" class="form-control input-md" required="">
-
-              </div>
+                <div class="col-xs-8">
+                  <input id="carColor" name="carColor" type="text" placeholder="eg: Matte Black" class="form-control input-md" required="">
+                </div>
             </div>
 
             <!-- Text input-->
             <div class="form-group">
               <label class="col-md-4 control-label" for="style">Car Style</label>
-              <div class="col-xs-8">
-              <input id="carStyle" name="carStyle" type="text" placeholder="eg: Jack Bauer Edition; or 'Sedan'" class="form-control input-md" required="">
-
-              </div>
+                <div class="col-xs-8">
+                  <input id="carStyle" name="carStyle" type="text" placeholder="eg: Jack Bauer Edition; or 'Sedan'" class="form-control input-md" required="">
+                </div>
             </div>
 
             </fieldset>
@@ -172,7 +165,7 @@
     </div><!-- /.modal -->
 
 
-	<!-- Modal to edit a single prospect's Wishlist items (cars) -->
+	<!-- Modal to edit a single prospect's desired cars (wishlist items) -->
 	<div class="modal fade" id="editCarsModal" tabindex="-1" role="dialog" aria-labelledby="editCarsModalTitle">
 		<div class="modal-dialog bs-modal-lg" role="document">
 			<div class="modal-content">

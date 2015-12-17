@@ -3,7 +3,7 @@
 
 var db = require("./models");
 
-// Seeding with 2 base prospects to start off with
+// Seeding with 2 prospects to start off with
 var prospectsList = [];
 prospectsList.push({
 					name: "John Doe",
@@ -18,7 +18,7 @@ prospectsList.push({
 					address: "987 fake lane"
 				});
 
-// Seeding each of the prospects with base desired cars to start off with
+// Seeding each of the prospects with 2 desired cars to start off with
 var wishCars = [];
 wishCars.push({
 				make: "Honda",
@@ -35,7 +35,7 @@ wishCars.push({
 				style: "pickup"
 			});
 
-// Populating each prospect's desired wishlist of cars
+// Populating each prospect's wishlist of desired cars
 prospectsList.forEach(function(prospect) {
 	prospect.wishlists = wishCars;
 });

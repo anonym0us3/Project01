@@ -1,43 +1,40 @@
 /* CLIENT-SIDE JS */
 
 $(document).ready(function() {
-	console.log("Braaaaaiiiiiiins");
-  // Showing prospects on page-load
+	console.log("Sanity Check:       Braaaaaiiiiiiins");
+  // Show prospects on page-load
   $.get('/api/prospects').success(function (prospects) {
     prospects.forEach(function(prospect) {
       renderProspect(prospect);
     });
   });
 
-  // Adding a new prospect
+  // Add a new prospect
   $('#prospect-form form').on('submit', function(e) {
   e.preventDefault();
   var formData = $(this).serialize();
-  console.log('formData', formData);
   $.post('/api/prospects', formData, function(prospect) {
-    console.log('prospect after POST', prospect);
     renderProspect(prospect);  //render the server's response
   });
   $(this).trigger("reset");
   });
 
-  // Adding an additional vehicle to a prospect's wishlist
+  // Add an additional car to a prospect's wishlist of desired cars
   $('#prospects').on('click', '.add-car', function(e) {
     var id = $(this).parents('.prospect').data('prospect-id');
-    console.log('id',id);
   $('#newCarModal').data('prospect-id', id);
   $('#newCarModal').modal();
   });
 
 
-  // Deleting a prospect & their associated vehicle(s) wishlist
+  // Delete a prospect & their associated vehicle(s) (wishlist items)
   $('#prospects').on('click', '.delete-prospect', function(e) {
     var id = $(this).parents('.prospect').data('prospect-id');
-    console.log('deleted id', id);
     $.ajax({
       method: 'DELETE',
       url: ('/api/prospects/' + id),
       success: function () {
+        // Because Robert Oppenheimer is a f*&%!ng b@d@$$, quoting from Bhagavad-Gita:
         console.log("Now I am become death, Destroyer of worlds!");
         $('#' + id).remove();
       }
@@ -45,13 +42,13 @@ $(document).ready(function() {
   });
 
 
-  // Saving new vehicle submission to prospect's wishlist
+  // Save new vehicle submission to prospect's wishlist
   $('#saveNewCar').on('click', handleNewCarSubmit);
 
-  // Updating a prospect's details
+  // Update a prospect's details
   $('#prospects').on('click', '.edit-prospect', handleProspectEdit);
 
-  // Saving a prospect's updated details
+  // Save a prospect's details on update
   $('#prospects').on('click', '.save-edits', handleSaveProspectChanges);
 
   // Click action for editing a single prospect's wishlists
@@ -70,10 +67,10 @@ $(document).ready(function() {
 // End of Document Ready
 
 
-// AJAX for handling updating (PUT) a single (or multiple?) car's/cars' data
+// AJAX for handling updating single car's data/information fields
 function handleUpdateCar(e) {
   e.preventDefault();
-  // Gets the values from the car in the modal
+  // Get the values from the car in the modal
   var prospectId = $(this).attr('id');
   var make = $(this).find('.wishlist-make').val();
   var model = $(this).find('.wishlist-model').val();
@@ -82,7 +79,6 @@ function handleUpdateCar(e) {
   var style = $(this).find('.wishlist-style').val();
   var wishlistId = $(this).find('.delete-car').attr('data-wishlist-id');
   var url = '/api/prospects/' + prospectId + '/wishlists/' + wishlistId;
-  console.log('PUT', url, make, model, year, color, style);
   $.ajax({
     method: 'PUT',
     url: url,
@@ -98,10 +94,8 @@ function handleUpdateCar(e) {
 function handleEditWishlistsClick(e) {
   e.preventDefault();
   var prospectId = $(this).parents('.prospect').data('prospect-id');
-  console.log("clicked on:" + prospectId);
   // getting all cars (wishlists) for this single prospect
   $.get('/api/prospects/' + prospectId + '/wishlists').success(function(wishlists) {
-    console.log(wishlists);
     var formHtml = generateEditWishlistsModalHtml(wishlists, prospectId);
     $('#editCarsModalBody').html(formHtml);
     $('#editCarsModal').modal();    
@@ -109,8 +103,7 @@ function handleEditWishlistsClick(e) {
 }
 
 
-// Takes an array of car data from the wishlist and produces an Edit form for the data
-// {From tunely: "we want to have both the prospectId and wishlistId available". Don't yet know why}
+// Take an array of car data from the wishlist and produce an Edit form from the data
 function generateEditWishlistsModalHtml(wishlists, prospectId) {
   var html = '';
   wishlists.forEach(function(wishlist) {
@@ -167,34 +160,28 @@ function handleDeleteCarClick(e) {
 
 
 function updateWishlistsList(prospectId) {
-  // Re-getting cars again (since 1's been deleted)
+  // Re-getting cars again (after one has been deleted)
   $.get('/api/prospects/' + prospectId + '/wishlists/').success(function(someProspects) {
-    console.log('replacement prospects', someProspects);
-    // Building a new <li> item
+    // Build a new <li> item
     var replacementLi = buildWishlistHtml(someProspects);
-    // Replacing the <li> with the cars in it
-    console.log("daniel here:",replacementLi);
+    // Replace the <li> with the cars in it
     $('[data-prospect-id=' + prospectId + '] .carsHeader').remove();
     $('[data-prospect-id=' + prospectId + '] .carsList').remove();
     $('[data-prospect-id=' + prospectId + '] .stuffContainer').append(replacementLi);
-
-    // $($originalLi).text(replacementLi);
   });
 }
 
 
-// Takes a customer (aka prospect) id (from mongo customer DB) and returns the row in which that customer exists
+// Takes a customer (prospect) id (from mongoDB) and returns the row in which that customer exists
 function getProspectRowById(id) {
   return $('[data-prospect-id=' + id + ']');
 }
 
 
-// Creates the UPDATE forms for customer (aka prospect) model when using UPDATE route
+// Create the UPDATE form for customer (prospect) model when using UPDATE route
 function handleProspectEdit (e) {
   var prospectId = $(this).parents('.prospect').data('prospect-id');
   var $prospectRow = getProspectRowById(prospectId);
-
-  console.log('attempting to edit id', prospectId);
 
   $(this).parent().find('.edit-prospect').hide();
   $(this).parent().find('.save-edits').show();
@@ -215,7 +202,7 @@ function handleProspectEdit (e) {
 }
 
 
-// Processes the newly-supplied data for a customer and PUTS it back to the DB
+// Process the newly-supplied data for a customer and PUT it back to the DB
 function handleSaveProspectChanges(e) {
   var prospectId = $(this).parents('.prospect').data('prospect-id');
   var $prospectRow = getProspectRowById(prospectId);
@@ -232,7 +219,6 @@ function handleSaveProspectChanges(e) {
     url: '/api/prospects/' + prospectId,
     data: data,
     success: function(data) {
-      console.log(data);
       $prospectRow.replaceWith(generateProspectHtml(data));
     }
   });
@@ -242,7 +228,7 @@ function handleSaveProspectChanges(e) {
 }
 
 
-// handles the modal fields and POSTing the form to the server
+// Handle the modal fields and POST the form to the server
 function handleNewCarSubmit(e) {
   var prospectId = $('#newCarModal').data('prospect-id');
   var carMake = $('#carMake').val();
@@ -260,21 +246,18 @@ function handleNewCarSubmit(e) {
   };
 
   var postUrl = '/api/prospects/' + prospectId + '/wishlists';
-  console.log('posting to ', postUrl, ' with data ', formData);
 
   $.post(postUrl, formData)
     .success(function(wishlist) {
-      // console.log('wishlist', wishlist);
-
-      // re-get full prospect and render on page
+      // Re-get full prospect and render on page
       $.get('/api/prospects/' + prospectId).success(function(prospect) {
-        //remove old entry
+        // Remove old entry
         $('[data-prospect-id='+ prospectId + ']').remove();
-        // render a replacement
+        // Render a replacement
         renderProspect(prospect);
       });
 
-      //clear form
+      // Clear form
       $('#carMake').val('');
       $('#carModel').val('');     
       $('#carYear').val('');
@@ -286,14 +269,11 @@ function handleNewCarSubmit(e) {
 }
 
 
-// Insert comment here later
 function buildWishlistHtml(wishlists) {
-  // console.log(wishlists);
   var wishlistText = "";
   wishlists.forEach(function(wishlist) {
     wishlistText += "<li class='wishlists-list' id=" + wishlist._id + ">" + " " + wishlist.make + " " + wishlist.model + " " +
                   wishlist.year + " " + wishlist.color + " " + wishlist.style + "</a></li>";
-                  // console.log(wishlistText); 
   });
   var wishlistHtml = 
 "                       <h4 class='inline-header carsHeader'>Desired cars list:</h4>" +
@@ -302,7 +282,7 @@ function buildWishlistHtml(wishlists) {
 }
 
 
-// Takes a single prospect and adds it to the page
+// Take a single prospect and add it to the page
 function generateProspectHtml(prospect) {
 
   var prospectHtml =
@@ -361,10 +341,9 @@ function generateProspectHtml(prospect) {
     return prospectHtml;
  }
 
-// this function takes a single prospect and renders it to the page
+// Takes a single prospect and render it to the page
 function renderProspect(prospect) {
   var html = generateProspectHtml(prospect);
-  console.log('rendering prospect:', prospect);
 
   $('#prospects').prepend(html);
 }
