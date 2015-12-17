@@ -120,8 +120,15 @@ function handleDeleteCarClick(e) {
   var wishlistId = $(this).data('wishlist-id');
   var prospectId = $(this).closest('form').attr('id');
   var $thisWishlist = $(this);
-  var requestUrl = ('api/prospects/' + prospectId + '/wishlists' + wishlistId);
+  var requestUrl = ('api/prospects/' + prospectId + '/wishlists/' + wishlistId);
   console.log('DELETE ', requestUrl);
+  $.ajax({
+    method: 'DELETE',
+    url: requestUrl,
+    success: function(data) {
+      $thisWishlist.closest('form').remove();
+    }
+  });
 }
 
 
