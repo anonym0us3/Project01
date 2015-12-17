@@ -1,6 +1,6 @@
 # carTopiary (Project01)
 
-heroku link: http://aqueous-island-4247.herokuapp.com/
+heroku link: http://aqueous-island-4247.herokuapp.com
 github link: https://github.com/anonym0us3/Project01
 
 ![screenshot]
