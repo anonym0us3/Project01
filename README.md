@@ -21,5 +21,5 @@ Full CRUD Single-Page App with mongoose and Express.
 Endpoint | Method | Route | Data
 --- | --- | --- | ---
 *API* | GET | /api | Basic API details
-*Prospects (aka customers)* | GET | /api/prospects | name, phone number, email address, physical address
+*Prospects* (aka customers) | GET | /api/prospects | name, phone number, email address, physical address
 *Wishlists* (aka customer's desired car(s) | GET | /api/prospects/:prospectId/wishlists | make, model, year, color, style
