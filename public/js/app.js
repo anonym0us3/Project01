@@ -188,16 +188,16 @@ function handleProspectEdit (e) {
 
   // replace current spans with inputs
   var prospectName = $prospectRow.find('span.prospect-name').text();
-  $prospectRow.find('span.prospect-name').html('<input class="edit-prospect-name" value="' + prospectName + '"></input>');
+  $prospectRow.find('span.prospect-name').html('<input class="edit-prospect-name" value="' + prospectName + '">');
 
   var prospectPhone = $prospectRow.find('span.prospect-phone').text();
-  $prospectRow.find('span.prospect-phone').html('<input class="edit-prospect-phone" type="tel" pattern="^\d{10}$" value="' + prospectPhone + '"></input>');
+  $prospectRow.find('span.prospect-phone').html('<input class="edit-prospect-phone" type="tel" pattern="^\d{10}$" value="' + prospectPhone + '">');
 
   var prospectEmail = $prospectRow.find('span.prospect-email').text();
-  $prospectRow.find('span.prospect-email').html('<input class="edit-prospect-email" value="' + prospectEmail + '"></input>');
+  $prospectRow.find('span.prospect-email').html('<input class="edit-prospect-email" value="' + prospectEmail + '">');
 
   var prospectAddress = $prospectRow.find('span.prospect-address').text();
-  $prospectRow.find('span.prospect-address').html('<input class="edit-prospect-address" value="' + prospectAddress + '"></input>');
+  $prospectRow.find('span.prospect-address').html('<input class="edit-prospect-address" value="' + prospectAddress + '">');
 
 }
 
