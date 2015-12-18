@@ -1,6 +1,6 @@
 1: implementing pattern-control to force this field to be a 10-digit number
 
-<input id="phone" name="phone" type="tel" pattern="^\d{10}$" placeholder="1234567890" class="form-control input-md" required="">
+\<input id="phone" name="phone" type="tel" pattern="^\d{10}$" placeholder="1234567890" class="form-control input-md" required=""\>
 
 
 2: Using += here instead of just = meant that I was no longer duplicating my submission entries, but rather adding to the existing ones
