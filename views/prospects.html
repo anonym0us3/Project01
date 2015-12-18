@@ -58,9 +58,9 @@
 
               <!-- Text input-->
               <div class="form-group">
-                <label class="col-md-4 control-label" for="phone">Prospect Phone (format: 5551112222)</label>
+                <label class="col-md-4 control-label" for="phone">Phone Number (10 digits only, eg: 5551112222)</label>
                   <div class="col-md-4">
-                    <input id="phone" name="phone" type="tel" pattern="^\d{10}$" placeholder="1234567890" class="form-control input-md">
+                    <input id="phone" name="phone" type="tel" pattern="^\d{10}$" placeholder="1234567890" class="form-control input-md" required="">
                   </div>
               </div>
 
@@ -68,7 +68,7 @@
               <div class="form-group">
                 <label class="col-md-4 control-label" for="email">Prospect Email</label>
                   <div class="col-md-4">
-                    <input id="email" name="email" type="text" placeholder="Email address" class="form-control input-md">
+                    <input id="email" name="email" type="email" placeholder="Email address" class="form-control input-md" required="">
                   </div>
               </div>
 
@@ -76,7 +76,7 @@
               <div class="form-group">
                 <label class="col-md-4 control-label" for="address">Prospect Address</label>
                   <div class="col-md-4">
-                    <input id="address" name="address" type="text" placeholder="Mailing address" class="form-control input-md">
+                    <input id="address" name="address" type="text" placeholder="Mailing address" class="form-control input-md" required="">
                   </div>
               </div>
 
@@ -133,7 +133,7 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="year">Car Year (format: ####)</label>
                 <div class="col-xs-8">
-                  <input id="carYear" name="carYear" type="number" maxlength="4" placeholder="eg: 2006" class="form-control input-md" required="">
+                  <input id="carYear" name="carYear" type="number" min="4" max"4" placeholder="eg: 2006" class="form-control input-md" required="">
                 </div>
             </div>
 

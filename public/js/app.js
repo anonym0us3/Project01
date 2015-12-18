@@ -190,9 +190,8 @@ function handleProspectEdit (e) {
   var prospectName = $prospectRow.find('span.prospect-name').text();
   $prospectRow.find('span.prospect-name').html('<input class="edit-prospect-name" value="' + prospectName + '"></input>');
 
-  var pattern = $("#phone").attr('pattern');
   var prospectPhone = $prospectRow.find('span.prospect-phone').text();
-  $prospectRow.find('span.prospect-phone').html('<input class="edit-prospect-phone" type="tel" pattern="' + pattern + '" value="' + prospectPhone + '"></input>');
+  $prospectRow.find('span.prospect-phone').html('<input class="edit-prospect-phone" type="tel" pattern="^\d{10}$" value="' + prospectPhone + '"></input>');
 
   var prospectEmail = $prospectRow.find('span.prospect-email').text();
   $prospectRow.find('span.prospect-email').html('<input class="edit-prospect-email" value="' + prospectEmail + '"></input>');
