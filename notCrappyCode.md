@@ -5,8 +5,8 @@
 
 ###2: Using += here instead of just = meant that I was no longer duplicating my submission entries, but rather adding to the existing ones
 
-wishlistText += "<li class='wishlists-list' id=" + wishlist._id + ">" + " " + wishlist.make + " " + wishlist.model + " " +
-wishlist.year + " " + wishlist.color + " " + wishlist.style + "</a></li>";
+wishlistText += "\<li class='wishlists-list' id=" + wishlist._id + ">" + " " + wishlist.make + " " + wishlist.model + " " +
+wishlist.year + " " + wishlist.color + " " + wishlist.style + "\</a\>\</li\>";
 
 ###3: CSS Style for hard-coded new customer submit button
 
