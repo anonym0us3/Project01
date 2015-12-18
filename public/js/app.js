@@ -1,7 +1,7 @@
 /* CLIENT-SIDE JS */
 
 $(document).ready(function() {
-	console.log("Sanity Check:       Braaaaaiiiiiiins");
+	console.log("Sanity Check:    Braaaaaiiiiiiins!");
   // Show prospects on page-load
   $.get('/api/prospects').success(function (prospects) {
     prospects.forEach(function(prospect) {
@@ -34,7 +34,7 @@ $(document).ready(function() {
       method: 'DELETE',
       url: ('/api/prospects/' + id),
       success: function () {
-        // Because Robert Oppenheimer is a f*&%!ng b@d@$$, quoting from Bhagavad-Gita:
+        // Because Robert Oppenheimer is a b@d@$$, quoting from Bhagavad-Gita:
         console.log("Now I am become death, Destroyer of worlds!");
         $('#' + id).remove();
       }
