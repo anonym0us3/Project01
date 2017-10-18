@@ -8,14 +8,14 @@
 
 
 
-##carTopiary Overview:
+## carTopiary Overview:
 
 
 Full CRUD Single-Page App with mongoose and Express.
 
 
 
-###Prerequisites
+### Prerequisites
 
 * jQuery, AJAX
 * Express server, static assets
@@ -26,7 +26,7 @@ Full CRUD Single-Page App with mongoose and Express.
 * mongoose embedded relationships
 
 
-###Completion
+### Completion
 
 - [x] Build a website!
 - [x] Have a CRUD'able model
@@ -36,7 +36,7 @@ Full CRUD Single-Page App with mongoose and Express.
 
 
 
-###API Endpoints
+### API Endpoints
 
 Endpoint | Method | Route | Data
 --- | --- | --- | ---
